@@ -3,6 +3,7 @@ package rootming.tjzhic.model;
 import rootming.tjzhic.utils.MiscUtils;
 
 import java.sql.Timestamp;
+import java.util.LinkedHashMap;
 
 /**
  * Created by rootming on 2017/2/27.
@@ -15,7 +16,12 @@ public class ConfigStage extends Model {
 
     @Override
     protected void init() {
-
+        LinkedHashMap<String, String> fields = new LinkedHashMap<>();
+        fields.put("config_name", null);
+        fields.put("config_time", null);
+        fields.put("config_stage", null);
+        setTableName("`config`");
+        setFieldsList(fields);
     }
 
     public ConfigStage(String name, String stageName) {

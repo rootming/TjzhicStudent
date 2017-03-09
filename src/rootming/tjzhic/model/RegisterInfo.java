@@ -1,5 +1,7 @@
 package rootming.tjzhic.model;
 
+import java.util.LinkedHashMap;
+
 /**
  * Created by rootming on 2017/2/27.
  */
@@ -35,6 +37,34 @@ public class RegisterInfo extends Model {
 
     @Override
     protected void init() {
+        LinkedHashMap<String, String> fields = new LinkedHashMap<>();
+        fields.put("reg_id", "key");
+        fields.put("reg_name", null);
+        fields.put("reg_username", null);
+        fields.put("reg_idcode", null);
+        fields.put("reg_sex", null);
+        fields.put("reg_nation", null);
+        fields.put("reg_political", null);
+        fields.put("reg_birthday", null);
+        fields.put("reg_homeaddr", null);
+        fields.put("reg_source", null);
+        fields.put("reg_school", null);
+        fields.put("reg_new", null);
+        fields.put("reg_aos", null);
+        fields.put("reg_major", null);
+        fields.put("reg_cet", null);
+        fields.put("reg_majorname", null);
+        fields.put("reg_piclocation", null);
+        fields.put("reg_mobile", null);
+        fields.put("reg_telephone", null);
+        fields.put("reg_zip", null);
+        fields.put("reg_conaddr", null);
+        fields.put("reg_confirm", null);
+        fields.put("reg_testcardnum", null);
+        fields.put("reg_examroom", null);
+        fields.put("reg_searnum", null);
+        setTableName("`major`");
+        setFieldsList(fields);
 
     }
     

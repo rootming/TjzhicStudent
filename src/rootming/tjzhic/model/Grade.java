@@ -1,5 +1,7 @@
 package rootming.tjzhic.model;
 
+import java.util.LinkedHashMap;
+
 /**
  * Created by rootming on 2017/2/27.
  */
@@ -13,7 +15,14 @@ public class Grade extends Model {
 
     @Override
     protected void init() {
-
+        LinkedHashMap<String, String> fields = new LinkedHashMap<>();
+        fields.put("grade_number", "key");
+        fields.put("grade_code", null);
+        fields.put("grade_score", null);
+        fields.put("grade_note", null);
+        fields.put("grade_status", null);
+        setTableName("`grade`");
+        setFieldsList(fields);
     }
 
     public Grade(String cardNumber, String courseCode, int score, String note, boolean status) {

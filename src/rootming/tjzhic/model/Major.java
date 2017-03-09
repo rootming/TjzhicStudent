@@ -1,5 +1,7 @@
 package rootming.tjzhic.model;
 
+import java.util.LinkedHashMap;
+
 /**
  * Created by rootming on 2017/2/27.
  */
@@ -13,7 +15,14 @@ public class Major extends Model {
 
     @Override
     protected void init() {
-
+        LinkedHashMap<String, String> fields = new LinkedHashMap<>();
+        fields.put("major_name", "key");
+        fields.put("major_pnum", null);
+        fields.put("major_anum", null);
+        fields.put("major_socre", null);
+        fields.put("major_people", null);
+        setTableName("`major`");
+        setFieldsList(fields);
     }
 
     public Major(String name, int planNumber, int applyNumber, int passScore, int passNumber) {
