@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="tjzhic@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="tjzhic">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="console"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="phpmyadmin"/>
+    <schema id="8" parent="1" name="test"/>
+    <table id="9" parent="2" name="course"/>
+    <table id="10" parent="2" name="group"/>
+    <table id="11" parent="2" name="log"/>
+    <table id="12" parent="2" name="menu"/>
+    <table id="13" parent="2" name="stage"/>
+    <table id="14" parent="2" name="user"/>
+    <column id="15" parent="9" name="id">
+      <Position>1</Position>
+      <DataType>mediumint(8)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="16" parent="9" name="course_name">
+      <Position>2</Position>
+      <DataType>varchar(128)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="9" name="course_major">
+      <Position>3</Position>
+      <DataType>varchar(128)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="9" name="course_start">
+      <Position>4</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="19" parent="9" name="course_end">
+      <Position>5</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
+    </column>
+    <index id="20" parent="9" name="course_name">
+      <ColNames>course_name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="21" parent="9" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="22" parent="9" name="course_name">
+      <ColNames>course_name</ColNames>
+      <UnderlyingIndexName>course_name</UnderlyingIndexName>
+    </key>
+    <column id="23" parent="10" name="id">
+      <Position>1</Position>
+      <DataType>mediumint(8)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="24" parent="10" name="group_name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="10" name="group_level">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="10" name="group_info">
+      <Position>4</Position>
+      <DataType>varchar(128)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="27" parent="10" name="group_info">
+      <ColNames>group_info</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="28" parent="10" name="group_name">
+      <ColNames>group_name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="29" parent="10" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="30" parent="10" name="group_name">
+      <ColNames>group_name</ColNames>
+      <UnderlyingIndexName>group_name</UnderlyingIndexName>
+    </key>
+    <key id="31" parent="10" name="group_info">
+      <ColNames>group_info</ColNames>
+      <UnderlyingIndexName>group_info</UnderlyingIndexName>
+    </key>
+    <column id="32" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>mediumint(8)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="33" parent="11" name="log_name">
+      <Position>2</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="11" name="log_group">
+      <Position>3</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="11" name="log_time">
+      <Position>4</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="36" parent="11" name="log_ip">
+      <Position>5</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="37" parent="11" name="fk_group_log">
+      <ColNames>log_group</ColNames>
+    </index>
+    <key id="38" parent="11" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="39" parent="11" name="fk_group_log">
+      <ColNames>log_group</ColNames>
+      <RefSchemaName>tjzhic</RefSchemaName>
+      <RefTableName>group</RefTableName>
+      <RefColNames>group_name</RefColNames>
+    </foreign-key>
+    <column id="40" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>mediumint(8)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="41" parent="12" name="menu_num">
+      <Position>2</Position>
+      <DataType>mediumint(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="12" name="menu_parentnum">
+      <Position>3</Position>
+      <DataType>mediumint(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="12" name="menu_class">
+      <Position>4</Position>
+      <DataType>mediumint(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="12" name="menu_name">
+      <Position>5</Position>
+      <DataType>varchar(128)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="12" name="menu_url">
+      <Position>6</Position>
+      <DataType>varchar(128)|0</DataType>
+      <DefaultExpression>&apos;#&apos;</DefaultExpression>
+    </column>
+    <column id="46" parent="12" name="menu_group">
+      <Position>7</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="47" parent="12" name="fk_group2">
+      <ColNames>menu_group</ColNames>
+    </index>
+    <key id="48" parent="12" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="49" parent="12" name="fk_group2">
+      <ColNames>menu_group</ColNames>
+      <RefSchemaName>tjzhic</RefSchemaName>
+      <RefTableName>group</RefTableName>
+      <RefColNames>group_name</RefColNames>
+    </foreign-key>
+    <column id="50" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>mediumint(8)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="51" parent="13" name="stage_name">
+      <Position>2</Position>
+      <DataType>varchar(128)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="13" name="stage_start">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="53" parent="13" name="stage_end">
+      <Position>4</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
+    </column>
+    <key id="54" parent="13" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="55" parent="14" name="user_id">
+      <Position>1</Position>
+      <DataType>mediumint(8)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="56" parent="14" name="user_email">
+      <Position>2</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="14" name="user_name">
+      <Position>3</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="14" name="user_password">
+      <Position>4</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="14" name="user_group">
+      <Position>5</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="14" name="user_ip">
+      <Position>6</Position>
+      <DataType>varchar(128)|0</DataType>
+    </column>
+    <column id="61" parent="14" name="user_date">
+      <Position>7</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <index id="62" parent="14" name="admin_email">
+      <ColNames>user_email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="63" parent="14" name="admin_name">
+      <ColNames>user_name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="64" parent="14" name="fk_group">
+      <ColNames>user_group</ColNames>
+    </index>
+    <key id="65" parent="14" name="PRIMARY">
+      <ColNames>user_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="66" parent="14" name="admin_email">
+      <ColNames>user_email</ColNames>
+      <UnderlyingIndexName>admin_email</UnderlyingIndexName>
+    </key>
+    <key id="67" parent="14" name="admin_name">
+      <ColNames>user_name</ColNames>
+      <UnderlyingIndexName>admin_name</UnderlyingIndexName>
+    </key>
+    <foreign-key id="68" parent="14" name="fk_group">
+      <ColNames>user_group</ColNames>
+      <RefSchemaName>tjzhic</RefSchemaName>
+      <RefTableName>group</RefTableName>
+      <RefColNames>group_name</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
