@@ -12,18 +12,39 @@
 
 
 <%
-    int userCount = 0;
-    int adminCount = 0;
-    //ServletContext context = session.getServletContext();
-    int onlineCount = LoginHandle.getActiveSessions();
-    try {
-        userCount = ModelUtils.queryObject(User.class, "user_group", "user").size();
-        adminCount = ModelUtils.queryAllObject(User.class).size() - userCount;
-    } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
-        e.printStackTrace();
-    }
+//    int userCount = 0;
+//    int adminCount = 0;
+//    //ServletContext context = session.getServletContext();
+//    int onlineCount = LoginHandle.getActiveSessions();
+//    try {
+//        userCount = ModelUtils.queryObject(User.class, "user_group", "user").size();
+//        adminCount = ModelUtils.queryAllObject(User.class).size() - userCount;
+//    } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
+//        e.printStackTrace();
+//    }
 
 %>
+
+<script>
+        function updateCount() {
+            $.ajax({
+                type: "post",
+                url: "DataHandle",
+                data: "cmd=get_state",
+                success: function (str) {
+                    var obj = eval('(' + str + ')');
+                    $("#user").text(obj.userCount);
+                    $("#admin").text(obj.adminCount);
+                    $("#online").text(obj.onlineCount);
+                }
+            });
+        }
+
+
+        $(function () {
+            setInterval("updateCount()", 5000); //每隔5秒刷新
+        });
+</script>
 
 
     <!-- Content Header (Page header) -->
@@ -45,8 +66,7 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3><%=userCount%></h3>
-
+                        <h3 id="user"></h3>
                         <p>注册人数</p>
                     </div>
                 </div>
@@ -56,8 +76,7 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3><%=adminCount%></h3>
-
+                        <h3 id="admin"></h3>
                         <p>系统管理员数量</p>
                     </div>
                 </div>
@@ -67,8 +86,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3><%=onlineCount%></h3>
-
+                        <h3 id="online"></h3>
                         <p>在线人数</p>
                     </div>
                 </div>
@@ -76,6 +94,8 @@
             <!-- ./col -->
 
         </div>
-
+<script>
+    updateCount();  // 第一次调用, 更新一下数据, 防止空白
+</script>
     </section>
     <!-- /.content -->

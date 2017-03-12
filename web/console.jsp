@@ -64,8 +64,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!--[if lt IE 9]>
     <script src="dist/js/html5shiv.min.js"></script>
     <script src="dist/js/respond.min.js"></script>
-
     <![endif]-->
+    <!-- jQuery 2.2.3 -->
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -169,8 +170,7 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 2.2.3 -->
-<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->

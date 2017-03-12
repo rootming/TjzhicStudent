@@ -13,59 +13,12 @@
         <listener-class>rootming.tjzhic.listener.SessionListener</listener-class>
     </listener>
 
-
-    <!--SQL注入过滤器-->
-    <filter>
-        <filter-name>SQLFilter</filter-name>
-        <filter-class>rootming.tjzhic.filter.SQLFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>SQLFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!--设置编码-->
-    <filter>
-        <filter-name>EncodeFilter</filter-name>
-        <filter-class>rootming.tjzhic.filter.EncodeFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>EncodeFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter-mapping>
-        <filter-name>EncodeFilter</filter-name>
-        <url-pattern>/*/*</url-pattern>
-    </filter-mapping>
-
-    <!--登陆检查-->
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>rootming.tjzhic.filter.LoginFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/console.jsp</url-pattern>
-    </filter-mapping>
-
-    <!--页面访问检查-->
-    <filter>
-        <filter-name>PageFilter</filter-name>
-        <filter-class>rootming.tjzhic.filter.PageFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>PageFilter</filter-name>
-        <url-pattern>/pages/*</url-pattern>
-    </filter-mapping>
-
+    <!--主页设置-->
     <welcome-file-list>
         <welcome-file>/login.jsp</welcome-file>
     </welcome-file-list>
 
+    <!--404页面设置-->
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>
@@ -106,6 +59,75 @@
         <servlet-name>RegisterHandle</servlet-name>
         <url-pattern>/RegisterHandle</url-pattern>
     </servlet-mapping>
+
+    <!--Data Handle-->
+    <servlet>
+        <servlet-name>DataHandle</servlet-name>
+        <servlet-class>rootming.tjzhic.handle.DataHandle</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DataHandle</servlet-name>
+        <url-pattern>/DataHandle</url-pattern>
+    </servlet-mapping>
+
+
+    <!--SQL注入过滤器-->
+    <filter>
+        <filter-name>SQLFilter</filter-name>
+        <filter-class>rootming.tjzhic.filter.SQLFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SQLFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--设置编码-->
+    <filter>
+        <filter-name>EncodeFilter</filter-name>
+        <filter-class>rootming.tjzhic.filter.EncodeFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodeFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>EncodeFilter</filter-name>
+        <url-pattern>/*/*</url-pattern>
+    </filter-mapping>
+
+    <!--console页面登陆检查-->
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>rootming.tjzhic.filter.LoginFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/console.jsp</url-pattern>
+    </filter-mapping>
+
+    <!--JSON获取检查-->
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>DataHandle</servlet-name>
+    </filter-mapping>
+
+    <!--页面访问检查-->
+    <filter>
+        <filter-name>PageFilter</filter-name>
+        <filter-class>rootming.tjzhic.filter.PageFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>PageFilter</filter-name>
+        <url-pattern>/pages/*</url-pattern>
+    </filter-mapping>
+
+
 
 
 
