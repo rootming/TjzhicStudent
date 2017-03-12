@@ -43,6 +43,7 @@
             <li class="header">菜单</li>
             <!-- Optionally, you can add icons to the links -->
             <%
+                //这边就不用js实现了
                 if(menus.size() > 0) {
                     for (int i = 0; i < menus.size(); i++) {
                         if (menus.get(i).size() > 1) {

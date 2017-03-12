@@ -10,6 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>登陆历史</h1>
@@ -23,7 +24,7 @@
 <section class="content">
 
     <!-- Your Page Content Here -->
-    <div class="box">
+    <div class="box" ng-app="history-box" ng-controller="siteCtrl">
         <div class="box-header">
             <h3 class="box-title">系统登陆历史记录</h3>
         </div>
@@ -41,33 +42,39 @@
                 </thead>
                 <tbody>
                 <%
-                    LinkedList<Object> logs;
-                    LinkedList<Object> groups;
-                    try {
-                        logs = ModelUtils.queryAllObject(Log.class);
-                        groups = ModelUtils.queryAllObject(Group.class);
-
-                        for(int i = 0; i < logs.size(); i++) {
-                            Log log = (Log)logs.get(i);
-                            out.print("<tr role=\"row\" class=\"odd\">");
-                            out.print("<td>" + i + "</td>");
-                            out.print("<td>" + log.getName() + "</td>");
-                            for(int j = 0; j < groups.size(); j++) {
-                                Group group = (Group)groups.get(j);
-                                if(group.getGroupName().equals(log.getGroup())) {
-                                    out.print("<td>" + group.getGroupInfo() + "</td>");
-                                    break;
-                                }
-                            }
-                            out.print("<td>" + log.getTime() + "</td>");
-                            out.print("<td>" + log.getIp() + "</td>");
-                            out.print("</tr>");
-                        }
-                    } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+                    //                    LinkedList<Object> logs;
+//                    LinkedList<Object> groups;
+//                    try {
+//                        logs = ModelUtils.queryAllObject(Log.class);
+//                        groups = ModelUtils.queryAllObject(Group.class);
+//
+//                        for(int i = 0; i < logs.size(); i++) {
+//                            Log log = (Log)logs.get(i);
+//                            out.print("<tr role=\"row\" class=\"odd\">");
+//                            out.print("<td>" + i + "</td>");
+//                            out.print("<td>" + log.getName() + "</td>");
+//                            for(int j = 0; j < groups.size(); j++) {
+//                                Group group = (Group)groups.get(j);
+//                                if(group.getGroupName().equals(log.getGroup())) {
+//                                    out.print("<td>" + group.getGroupInfo() + "</td>");
+//                                    break;
+//                                }
+//                            }
+//                            out.print("<td>" + log.getTime() + "</td>");
+//                            out.print("<td>" + log.getIp() + "</td>");
+//                            out.print("</tr>");
+//                        }
+//                    } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
+//                        e.printStackTrace();
+//                    }
                 %>
-
+                <tr role="row" class="odd">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
 
                 </tbody>
                 <tfoot>
@@ -99,5 +106,53 @@
         </div>
         <!-- /.box-body -->
     </div>
+    <script>
+        $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "DataHandle?cmd=get_his",
+                success: function (data) {
+                    var tr = $(".odd");
+
+                    $.each(data, function (index, it) {
+                        var clonedTr = tr.clone();
+                        var _index = index;
+                        clonedTr.children("td").each(function(inner_index){
+//                            for (var i = 0; i < data.length; i++) {
+//                                var page = data[i];
+//                                console.log(page.page);
+//                                for (var j = 0; j < page.state.length; j++) {
+//                                    var item = page.state[j];
+//                                    console.log("ID:" + item.id);
+//                                    console.log("Name:" + item.name);
+//                                    console.log("Group:" + item.group);
+//                                    console.log("Time:" + item.time);
+//                                    console.log("IP:" + item.ip);
+//                                }
+//                            }
+                            switch(inner_index){
+                                case(0):
+                                    $(this).html(it.id);
+                                    break;
+                                case(1):
+                                    $(this).html(it.name);
+                                    break;
+                                case(2):
+                                    $(this).html(it.group);
+                                    break;
+                                case(3):
+                                    $(this).html(it.time);
+                                    break;
+                                case(4):
+                                    $(this).html(it.ip);
+                                    break;
+
+                            }
+                        });
+                    });
+                }
+            }
+        );
+    </script>
 </section>
 <!-- /.content -->

@@ -67,6 +67,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <![endif]-->
     <!-- jQuery 2.2.3 -->
     <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+
+    <script src="plugins/angular/angular.min.js"></script>
+
 </head>
 <!--
 BODY TAG OPTIONS:
