@@ -1,6 +1,7 @@
 package rootming.tjzhic.handle;
 
-import rootming.tjzhic.utils.JSONDataUtils;
+
+import rootming.tjzhic.utils.APIUtils;
 import rootming.tjzhic.utils.LogUtils;
 
 import javax.servlet.ServletException;
@@ -13,27 +14,32 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * Created by rootm on 2017/3/12.
+ * Created by rootm on 2017/3/13.
  */
-@WebServlet(name = "DataHandle")
-public class DataHandle extends HttpServlet {
+
+@WebServlet(name = "APIHandle")
+public class APIHandle extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cmd;
         String group;
+        String arg;
         HttpSession session = request.getSession();
 
         cmd = request.getParameter("cmd");
+        arg = request.getParameter("arg");
         group = (String)session.getAttribute("group");
 
         LogUtils.log("Post param: " + cmd + ", Group: " + group);
         if(cmd != null) {
             String data = null;
+
+            APIUtils api = new APIUtils();
             try {
-                JSONDataUtils json = new JSONDataUtils();
-                data = json.queryData(cmd, group);
+                data = api.doAPI(cmd, arg, group);
             } catch (InvocationTargetException | IllegalAccessException e) {
                 e.printStackTrace();
             }
+
             response.getWriter().write(data);
         }
 

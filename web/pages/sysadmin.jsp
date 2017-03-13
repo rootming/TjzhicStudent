@@ -70,9 +70,7 @@
                         e.printStackTrace();
                     }
 
-
                 %>
-
 
                 </tbody>
                 <tfoot>
@@ -81,29 +79,55 @@
             </table>
             </div>
             </div>
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button previous disabled" id="example2_previous">
-                                    <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a>
-                                </li>
-                                <li class="paginate_button active">
-                                    <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <%--<div class="row">--%>
+                    <%--<div class="col-sm-5">--%>
+                        <%--<div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="col-sm-7">--%>
+                        <%--<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">--%>
+                            <%--<ul class="pagination">--%>
+                                <%--<li class="paginate_button previous disabled" id="example2_previous">--%>
+                                    <%--<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a>--%>
+                                <%--</li>--%>
+                                <%--<li class="paginate_button active">--%>
+                                    <%--<a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>--%>
+                                <%--<li class="paginate_button ">--%>
+                                    <%--<a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a>--%>
+                                <%--</li>--%>
+                            <%--</ul>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
             </div>
         </div>
         <!-- /.box-body -->
     </div>
+    <script>
+        window.onload = function () {
+            $(".btn.btn-block.btn-danger").click(function () {
+                var td = $(this).parent().parent().children()[3];
+                var email = $(td).text();
+                console.log("Delete: " + email);
+                $ajax({
+                    type: "post",
+                    url: "APIHandle?cmd=del_admin" + "&" + email,
+                    beforeSend: function(XMLHttpRequest){
+                    },
+                    success: function(data){
+                        // alert(addr);
+                        $(".content-wrapper" ).load(addr, function() {
+                            console.log("API execute done");
+                            $(this).parent().parent().hide();
+                        });
+                    },
+                    error: function(){
+                        //请求出错处理
+                        console.error("API execute error");
+                    }
+                    });
+                });
+        };
+    </script>
 
 </section>
 <!-- /.content -->

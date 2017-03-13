@@ -71,6 +71,17 @@
         <url-pattern>/DataHandle</url-pattern>
     </servlet-mapping>
 
+    <!--API Handle-->
+    <servlet>
+        <servlet-name>APIHandle</servlet-name>
+        <servlet-class>rootming.tjzhic.handle.APIHandle</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>APIHandle</servlet-name>
+        <url-pattern>/APIHandle</url-pattern>
+    </servlet-mapping>
+
 
     <!--SQL注入过滤器-->
     <filter>
@@ -114,6 +125,12 @@
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <servlet-name>DataHandle</servlet-name>
+    </filter-mapping>
+
+    <!--API检查-->
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>APIHandle</servlet-name>
     </filter-mapping>
 
     <!--页面访问检查-->

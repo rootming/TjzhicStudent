@@ -42,39 +42,39 @@
                 </thead>
                 <tbody>
                 <%
-                    //                    LinkedList<Object> logs;
-//                    LinkedList<Object> groups;
-//                    try {
-//                        logs = ModelUtils.queryAllObject(Log.class);
-//                        groups = ModelUtils.queryAllObject(Group.class);
-//
-//                        for(int i = 0; i < logs.size(); i++) {
-//                            Log log = (Log)logs.get(i);
-//                            out.print("<tr role=\"row\" class=\"odd\">");
-//                            out.print("<td>" + i + "</td>");
-//                            out.print("<td>" + log.getName() + "</td>");
-//                            for(int j = 0; j < groups.size(); j++) {
-//                                Group group = (Group)groups.get(j);
-//                                if(group.getGroupName().equals(log.getGroup())) {
-//                                    out.print("<td>" + group.getGroupInfo() + "</td>");
-//                                    break;
-//                                }
-//                            }
-//                            out.print("<td>" + log.getTime() + "</td>");
-//                            out.print("<td>" + log.getIp() + "</td>");
-//                            out.print("</tr>");
-//                        }
-//                    } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
-//                        e.printStackTrace();
-//                    }
+                    LinkedList<Object> logs;
+                    LinkedList<Object> groups;
+                    try {
+                        logs = ModelUtils.queryAllObject(Log.class);
+                        groups = ModelUtils.queryAllObject(Group.class);
+
+                        for(int i = 0; i < logs.size(); i++) {
+                            Log log = (Log)logs.get(i);
+                            out.print("<tr role=\"row\" class=\"odd\">");
+                            out.print("<td>" + i + "</td>");
+                            out.print("<td>" + log.getName() + "</td>");
+                            for(int j = 0; j < groups.size(); j++) {
+                                Group group = (Group)groups.get(j);
+                                if(group.getGroupName().equals(log.getGroup())) {
+                                    out.print("<td>" + group.getGroupInfo() + "</td>");
+                                    break;
+                                }
+                            }
+                            out.print("<td>" + log.getTime() + "</td>");
+                            out.print("<td>" + log.getIp() + "</td>");
+                            out.print("</tr>");
+                        }
+                    } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 %>
-                <tr role="row" class="odd">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <%--<tr role="row" class="odd">--%>
+                    <%--<td></td>--%>
+                    <%--<td></td>--%>
+                    <%--<td></td>--%>
+                    <%--<td></td>--%>
+                    <%--<td></td>--%>
+                <%--</tr>--%>
 
                 </tbody>
                 <tfoot>
@@ -83,76 +83,76 @@
             </table>
             </div>
             </div>
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button previous disabled" id="example2_previous">
-                                    <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a>
-                                </li>
-                                <li class="paginate_button active">
-                                    <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
-                                <li class="paginate_button ">
-                                    <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <%--<div class="row">--%>
+                    <%--<div class="col-sm-5">--%>
+                        <%--<div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="col-sm-7">--%>
+                        <%--<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">--%>
+                            <%--<ul class="pagination">--%>
+                                <%--<li class="paginate_button previous disabled" id="example2_previous">--%>
+                                    <%--<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a>--%>
+                                <%--</li>--%>
+                                <%--<li class="paginate_button active">--%>
+                                    <%--<a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>--%>
+                                <%--<li class="paginate_button ">--%>
+                                    <%--<a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a>--%>
+                                <%--</li>--%>
+                            <%--</ul>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
             </div>
         </div>
         <!-- /.box-body -->
     </div>
     <script>
-        $.ajax({
-                type: "post",
-                dataType: "json",
-                url: "DataHandle?cmd=get_his",
-                success: function (data) {
-                    var tr = $(".odd");
-
-                    $.each(data, function (index, it) {
-                        var clonedTr = tr.clone();
-                        var _index = index;
-                        clonedTr.children("td").each(function(inner_index){
-//                            for (var i = 0; i < data.length; i++) {
-//                                var page = data[i];
-//                                console.log(page.page);
-//                                for (var j = 0; j < page.state.length; j++) {
-//                                    var item = page.state[j];
-//                                    console.log("ID:" + item.id);
-//                                    console.log("Name:" + item.name);
-//                                    console.log("Group:" + item.group);
-//                                    console.log("Time:" + item.time);
-//                                    console.log("IP:" + item.ip);
-//                                }
+//        $.ajax({
+//                type: "post",
+//                dataType: "json",
+//                url: "DataHandle?cmd=get_his",
+//                success: function (data) {
+//                    var tr = $(".odd");
+//
+//                    $.each(data, function (index, it) {
+//                        var clonedTr = tr.clone();
+//                        var _index = index;
+//                        clonedTr.children("td").each(function(inner_index){
+////                            for (var i = 0; i < data.length; i++) {
+////                                var page = data[i];
+////                                console.log(page.page);
+////                                for (var j = 0; j < page.state.length; j++) {
+////                                    var item = page.state[j];
+////                                    console.log("ID:" + item.id);
+////                                    console.log("Name:" + item.name);
+////                                    console.log("Group:" + item.group);
+////                                    console.log("Time:" + item.time);
+////                                    console.log("IP:" + item.ip);
+////                                }
+////                            }
+//                            switch(inner_index){
+//                                case(0):
+//                                    $(this).html(it.id);
+//                                    break;
+//                                case(1):
+//                                    $(this).html(it.name);
+//                                    break;
+//                                case(2):
+//                                    $(this).html(it.group);
+//                                    break;
+//                                case(3):
+//                                    $(this).html(it.time);
+//                                    break;
+//                                case(4):
+//                                    $(this).html(it.ip);
+//                                    break;
+//
 //                            }
-                            switch(inner_index){
-                                case(0):
-                                    $(this).html(it.id);
-                                    break;
-                                case(1):
-                                    $(this).html(it.name);
-                                    break;
-                                case(2):
-                                    $(this).html(it.group);
-                                    break;
-                                case(3):
-                                    $(this).html(it.time);
-                                    break;
-                                case(4):
-                                    $(this).html(it.ip);
-                                    break;
-
-                            }
-                        });
-                    });
-                }
-            }
-        );
+//                        });
+//                    });
+//                }
+//            }
+//        );
     </script>
 </section>
 <!-- /.content -->

@@ -17,4 +17,8 @@ public class Config {
 //    每页显示条目限制
     public final static int pageLimit = 10;
 
+
+    public final static String JSONError = "{\"error:\" 0}";
+    public final static String JSONSuccess = "{\"success:\" 0}";
+
 }

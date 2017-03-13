@@ -79,7 +79,9 @@ public class DatabaseUtils {
             for (int i = 1; i <= param.length; i++) {
                 prsts.setObject(i, param[i - 1]);
             }
-            success = prsts.execute();
+            prsts.execute();
+            if(prsts.getUpdateCount() > 0)
+                success = true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -88,7 +90,7 @@ public class DatabaseUtils {
         return success;
     }
 
-     List executeQuery(String sql, Object[] param) {
+    List executeQuery(String sql, Object[] param) {
         ResultSet rs = null;
         List list = null;
         Connection conn = this.getConnection();
@@ -120,14 +122,14 @@ public class DatabaseUtils {
         return list;
     }
 
-        public static void main(String[] args) {
-            final String sqlStr = "SELECT admin_password FROM admin WHERE admin_email=?";
-            final String arg[];
-            arg = new String[1];
-            arg[0] = "rootming@live.cn";
-            DatabaseUtils databaseUtils = new DatabaseUtils();
-            List result = databaseUtils.executeQuery(sqlStr, arg);
-            LinkedHashMap data = (LinkedHashMap)result.get(0);
-            System.out.println(data.get("admin_password"));
-        }
+    public static void main(String[] args) {
+        final String sqlStr = "SELECT admin_password FROM admin WHERE admin_email=?";
+        final String arg[];
+        arg = new String[1];
+        arg[0] = "rootming@live.cn";
+        DatabaseUtils databaseUtils = new DatabaseUtils();
+        List result = databaseUtils.executeQuery(sqlStr, arg);
+        LinkedHashMap data = (LinkedHashMap)result.get(0);
+        System.out.println(data.get("admin_password"));
+    }
 }
