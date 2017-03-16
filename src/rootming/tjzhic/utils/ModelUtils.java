@@ -373,6 +373,20 @@ public class ModelUtils {
         return databaseUtils.execute(sqlStr, arg);
     }
 
+    private static void genTestUser(int limit) {
+        for(int i = 0; i < limit; i++) {
+            User user = new User("test0" + i, "test0" + i + "@test.com", "rootming");
+            ModelUtils.addObject(user);
+        }
+    }
+
+    private static void genAdmin(int limit, String type) {
+        for(int i = 0; i < limit; i++) {
+            User user = new User(type + "testadmin0" + i, type + "testadmin0" + i + "@admin.com", "rootming", "127.0.0.1", type);
+            ModelUtils.addObject(user);
+        }
+    }
+
     static public void main(String []args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, InstantiationException {
 //        User user = new User("455718869@qq.com", "Stargazer", "rootming");
 //        ModelUtils mao = new ModelUtils();
@@ -387,7 +401,8 @@ public class ModelUtils {
             Log item = (Log) aMenuList;
             System.out.println(item.getGroup());
         }
-        deleteObject(User.class, "user_name", "littletao");
+        //genTestUser(1000);
+        genAdmin(10, "stuadmin");
 
         //Model data = new User.class.getClass();
 

@@ -17,8 +17,13 @@ public class Config {
 //    每页显示条目限制
     public final static int pageLimit = 10;
 
-
+//    JSON返回值定义
     public final static String JSONError = "{\"error:\" 0}";
     public final static String JSONSuccess = "{\"success:\" 0}";
+
+//    数据检测Pattern
+    public final static String usernamePattern = "^\\w{6,20}$";
+    public final static String emailPattern = "^([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+\\.[a-zA-Z]{2,3}$";
+    public final static String passwordPattern = "^\\w{6,20}$";
 
 }
