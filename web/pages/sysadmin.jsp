@@ -64,6 +64,8 @@
                             out.print("<td>" + user.getEmail() + "</td>");
                             out.print("<td><button type=\"button\" class=\"btn btn-block btn-warning\">清除</button></td>");
                             out.print("<td><button type=\"button\" class=\"btn btn-block btn-danger\">删除</button></td>");
+//                            out.print("<td><button type=\"button\" class=\"btn btn-block btn-warning\" data-toggle=\"modal\" data-target=\"#myModal\">清除</button></td>");
+//                            out.print("<td><button type=\"button\" class=\"btn btn-block btn-danger\" data-toggle=\"modal\" data-target=\"#myModal\">删除</button></td>");
                             out.print("</tr>");
                         }
                     } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
@@ -78,7 +80,47 @@
                 </tfoot>
             </table>
             </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">确认删除</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                此操作不可逆！
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary">确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            </div>
+            <div class="modal modal-success" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="resetModalLabel">信息</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            密码已重置为<strong>123456789</strong>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline" data-dismiss="modal" onclick="$(this).modal('hide');">确认</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
                 <%--<div class="row">--%>
                 <%--<div class="col-sm-5">--%>
                 <%--<div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>--%>
@@ -110,21 +152,120 @@
             $.ajax({
                 type: "post",
                 dataType: "json",
-                url: "APIHandle?cmd=del_admin" + "&" + email,
+                url: "APIHandle?cmd=del_admin" + "&arg=" + email,
                 success: function(data) {
+                    console.log("APIHandle?cmd=del_admin" + "&arg=" + email);
                     console.log(data);
-//                    try {
-//                        if (data.success == 0) {
-//                            $(this).parent().parent().hide();
-//                            console.log("API execute done");
-//                        }
-//                    } catch (e) {
-//                        console.error("API execute failed");
-//                    }
+                    //var result = eval('(' + data + ')');
+                    try {
+                        if (data.success == 1) {
+                            $(td).parent().hide();
+                            $(".modal-body").html("管理员已删除");
+                            $('#infoModal').modal('show');
+                            console.log("API execute done");
+                        }
+                        else {
+                            console.debug("API execute failed");
+                        }
+                    } catch (e) {
+                        console.debug(e);
 
+                    }
+
+                },
+
+                error: function() {
+                    console.debug("APIHandle?cmd=del_admin" + "&" + email);
+                    console.debug("Delete: del fail");
                 }
+
             });
         });
+
+        $(".btn.btn-block.btn-warning").click(function () {
+            var td = $(this).parent().parent().children()[3];
+            var email = $(td).text();
+            console.log("Delete: " + email);
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "APIHandle?cmd=rst_passwd" + "&arg=" + email,
+                success: function(data) {
+                    console.log("APIHandle?cmd=rst_passwd" + "&arg=" + email);
+                    console.log(data);
+                    //var result = eval('(' + data + ')');
+
+                    try {
+                        if (data.success == 1) {
+                            console.log("API execute done");
+                            $(".modal-body").html("密码已重置为<strong>123456789</strong>");
+                            $('#infoModal').modal('show');
+                            //$('#myModal').modal('show');
+                        }
+                        else {
+                            console.debug("API execute failed");
+                        }
+                    } catch (e) {
+                        console.debug(e);
+
+                    }
+
+                },
+
+                error: function() {
+                    console.debug("APIHandle?cmd=rst_passwd" + "&" + email);
+                    console.debug("Delete: del fail");
+                }
+
+            });
+        });
+
+
+        //function delAdmin(target) {
+//            console.log($(target));
+//            var td = $(target).parent().parent().children()[3];
+//            var email = $(td).text();
+//            console.log("Delete: " + email);
+//            $.ajax({
+//                type: "post",
+//                dataType: "json",
+//                url: "APIHandle?cmd=del_admin" + "&arg=" + email,
+//                success: function(data) {
+//                    console.log("APIHandle?cmd=del_admin" + "&arg=" + email);
+//                    console.log(data);
+//                    //var result = eval('(' + data + ')');
+//
+//                    try {
+//                        if (data.success == 1) {
+//                            $(td).parent().hide();
+//                            console.log("API execute done");
+//                        }
+//                        else {
+//                            console.debug("API execute failed");
+//                        }
+//                    } catch (e) {
+//                        console.debug(e);
+//
+//                    }
+//
+//                },
+//
+//                error: function() {
+//                    console.error("APIHandle?cmd=del_admin" + "&" + email);
+//                    console.error("Delete: del fail")
+//                }
+//
+//            });
+//
+//}
+
+//        var modal= $('#myModal');
+//        modal.on("show.bs.modal", function (e) {
+//            var btn = $(e.relatedTarget);
+//            var id = btn.da
+//            delAdmin(id);
+//
+//        });
     </script>
 
 </section>

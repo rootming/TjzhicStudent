@@ -2,7 +2,7 @@ package rootming.tjzhic.listener; /**
  * Created by rootm on 2017/3/9.
  */
 
-import rootming.tjzhic.filter.LoginFilter;
+
 import rootming.tjzhic.handle.LoginHandle;
 import rootming.tjzhic.utils.LogUtils;
 
@@ -42,6 +42,7 @@ public class SessionListener implements ServletContextListener,
     // -------------------------------------------------------
     public void sessionCreated(HttpSessionEvent se) {
       /* Session is created. */
+        LogUtils.log("Session is destroyed.");
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {

@@ -61,15 +61,15 @@
     </servlet-mapping>
 
     <!--Data Handle-->
-    <servlet>
-        <servlet-name>DataHandle</servlet-name>
-        <servlet-class>rootming.tjzhic.handle.DataHandle</servlet-class>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>DataHandle</servlet-name>-->
+        <!--<servlet-class>rootming.tjzhic.handle.DataHandle</servlet-class>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>DataHandle</servlet-name>
-        <url-pattern>/DataHandle</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>DataHandle</servlet-name>-->
+        <!--<url-pattern>/DataHandle</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!--API Handle-->
     <servlet>

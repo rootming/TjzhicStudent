@@ -18,8 +18,8 @@ public class Config {
     public final static int pageLimit = 10;
 
 //    JSON返回值定义
-    public final static String JSONError = "{\"error:\" 0}";
-    public final static String JSONSuccess = "{\"success:\" 0}";
+    public final static String JSONError = "{\"success\" : 0}";
+    public final static String JSONSuccess = "{\"success\" : 1}";
 
 //    数据检测Pattern
     public final static String usernamePattern = "^\\w{6,20}$";

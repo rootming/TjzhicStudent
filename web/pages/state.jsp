@@ -29,7 +29,7 @@
         function updateCount() {
             $.ajax({
                 type: "post",
-                url: "DataHandle",
+                url: "APIHandle",
                 data: "cmd=get_state",
                 success: function (str) {
                     var obj = eval('(' + str + ')');
@@ -42,7 +42,7 @@
 
 
         $(function () {
-            setInterval("updateCount()", 5000); //每隔5秒刷新
+            setInterval("updateCount()", 60000); //每隔60秒刷新
         });
 </script>
 
