@@ -147,30 +147,6 @@ public class APIUtils {
 
     }
 
-    public String queryData(String cmd, String group) throws InvocationTargetException, IllegalAccessException {
-        JSONDataUtils obj = new JSONDataUtils();
-        Method methods[] = obj.getClass().getDeclaredMethods();
-        Method m = null;
-        boolean found = false;
-
-        if(!checkValid(cmd, group)) {
-            return Config.JSONError;
-        }
-
-        for(Method method : methods) {
-            if(method.getName().equals(cmd)) {
-                m = method;
-                found = true;
-            }
-        }
-
-        if(!found) {
-            return Config.JSONError;
-        }
-
-        return (String)m.invoke(obj);
-    }
-
 
     private static String get_state(String arg) {
         Gson gson = new GsonBuilder().create();
