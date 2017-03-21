@@ -39,7 +39,7 @@ public class LoginHandle extends HttpServlet {
         email = request.getParameter("email");
         password = request.getParameter("password");
         if(email != null && password != null) {
-            password = PasswordUtils.getEnPassword(password);
+            password = RegisterUtils.getEnPassword(password);
             User user = null;
             System.out.println(email);
             System.out.println(password);
@@ -68,7 +68,7 @@ public class LoginHandle extends HttpServlet {
         }
 //
 //        if(UserUtils.find(email)) {
-//            if(PasswordUtils.passwordCheck(PasswordUtils.getEnPassword(password), UserUtils.getAdminStorePasswordFromEmail(email))) {
+//            if(RegisterUtils.passwordCheck(RegisterUtils.getEnPassword(password), UserUtils.getAdminStorePasswordFromEmail(email))) {
 //                LogUtils.log("Login successful");
 //                session.setAttribute("email", email);
 //                session.setAttribute("password", password);
@@ -78,7 +78,7 @@ public class LoginHandle extends HttpServlet {
 //                LogUtils.log("Login failed");
 //                LogUtils.log("Password wrong");
 //                LogUtils.log(password);
-//                LogUtils.log(PasswordUtils.getEnPassword(password));
+//                LogUtils.log(RegisterUtils.getEnPassword(password));
 //                LogUtils.log(UserUtils.getAdminStorePasswordFromEmail(email));
 //                request.setAttribute("message", "没有找到该用户或密码错误");
 //                request.getRequestDispatcher("login.jsp").forward(request, response);

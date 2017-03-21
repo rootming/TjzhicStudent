@@ -3,9 +3,9 @@ package rootming.tjzhic.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import rootming.tjzhic.Config;
-import rootming.tjzhic.Data.AdminState;
-import rootming.tjzhic.Data.History;
-import rootming.tjzhic.Data.UserState;
+import rootming.tjzhic.Data.AdminStateData;
+import rootming.tjzhic.Data.HistoryData;
+import rootming.tjzhic.Data.UserStateData;
 import rootming.tjzhic.handle.LoginHandle;
 import rootming.tjzhic.model.Group;
 import rootming.tjzhic.model.Log;
@@ -105,7 +105,7 @@ public class APIUtils {
         try {
             User user = (User)ModelUtils.queryObject(User.class,  arg);
             assert user != null;
-            user.setPassword(PasswordUtils.getEnPassword("123456789"));
+            user.setPassword(RegisterUtils.getEnPassword("123456789"));
             ModelUtils.deleteObject(User.class, "user_email", arg);
             ModelUtils.addObject(user);
             flag = true;
@@ -131,7 +131,7 @@ public class APIUtils {
         try {
             User user = (User)ModelUtils.queryObject(User.class,  arg);
             assert user != null;
-            user.setPassword(PasswordUtils.getEnPassword("123456789"));
+            user.setPassword(RegisterUtils.getEnPassword("123456789"));
             ModelUtils.deleteObject(User.class, "user_email", arg);
             ModelUtils.addObject(user);
             flag = true;
@@ -161,7 +161,7 @@ public class APIUtils {
         }
 
 
-        UserState state = new UserState(userCount, adminCount, onlineCount);
+        UserStateData state = new UserStateData(userCount, adminCount, onlineCount);
         //System.out.println(gson.toJson(state));
         return gson.toJson(state);
     }
@@ -170,9 +170,9 @@ public class APIUtils {
         Gson gson = new GsonBuilder().create();
         LinkedList<Object> users;
         LinkedList<Object> groups;
-//        LinkedList<Page<AdminState>> sections = new LinkedList<>();
+//        LinkedList<PageData<AdminStateData>> sections = new LinkedList<>();
 
-        LinkedList<AdminState> adminStates = new LinkedList<>();
+        LinkedList<AdminStateData> adminStateDatas = new LinkedList<>();
 
         try {
             users = ModelUtils.queryObjectLike(User.class, "user_group", "%admin");
@@ -183,7 +183,7 @@ public class APIUtils {
 //                int index = i / Config.pageLimit;
 
 //                if(i % Config.pageLimit == 0) {
-//                    sections.add(new Page<>());
+//                    sections.add(new PageData<>());
 //                    //sections.get(index).setPage(index);
 //                    sections.get(index).setState(new LinkedList<>());
 //                }
@@ -191,8 +191,8 @@ public class APIUtils {
                 for (int j = 0; j < groups.size(); j++) {
                     Group group = (Group) groups.get(j);
                     if (group.getGroupName().equals(user.getGroup())) {
-                        adminStates.add(
-                                new AdminState(i, user.getName(), group.getGroupInfo(), user.getEmail()));
+                        adminStateDatas.add(
+                                new AdminStateData(i, user.getName(), group.getGroupInfo(), user.getEmail()));
                         break;
                     }
                 }
@@ -202,15 +202,15 @@ public class APIUtils {
         } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        return gson.toJson(adminStates);
+        return gson.toJson(adminStateDatas);
     }
 
     private static String get_his(String arg) {
         Gson gson = new GsonBuilder().create();
         LinkedList<Object> logs;
         LinkedList<Object> groups;
-        //LinkedList<Page<History>> sections = new LinkedList<>();
-        LinkedList<History> history = new LinkedList<>();
+        //LinkedList<PageData<HistoryData>> sections = new LinkedList<>();
+        LinkedList<HistoryData> historyData = new LinkedList<>();
 
         try {
             logs = ModelUtils.queryAllObject(Log.class);
@@ -221,7 +221,7 @@ public class APIUtils {
                 int index = i / Config.pageLimit;
 
 //                if(i % Config.pageLimit == 0) {
-//                    sections.add(new Page<>());
+//                    sections.add(new PageData<>());
 //                    System.out.println(index);
 //                    //sections.get(index).setPage(index);
 //                    sections.get(index).setState(new LinkedList<>());
@@ -230,8 +230,8 @@ public class APIUtils {
                 for (int j = 0; j < groups.size(); j++) {
                     Group group = (Group) groups.get(j);
                     if (group.getGroupName().equals(log.getGroup())) {
-                        history.add(
-                                new History(i, log.getName(), group.getGroupInfo(), log.getTime(), log.getIp()));
+                        historyData.add(
+                                new HistoryData(i, log.getName(), group.getGroupInfo(), log.getTime(), log.getIp()));
                         break;
                     }
                 }
@@ -241,7 +241,7 @@ public class APIUtils {
         } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        return gson.toJson(history);
+        return gson.toJson(historyData);
     }
 
 

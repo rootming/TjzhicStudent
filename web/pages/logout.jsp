@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Content Header (Page header) -->
+<!-- Content Header (PageData header) -->
 <section class="content-header">
     <h1>退出系统<small>退出登录状态</small></h1>
     <ol class="breadcrumb">

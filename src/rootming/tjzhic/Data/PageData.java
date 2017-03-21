@@ -5,15 +5,15 @@ import java.util.LinkedList;
 /**
  * Created by rootm on 2017/3/12.
  */
-public class Page<T> {
+public class PageData<T> {
 //    private int page;
     private LinkedList<T> state;
 
-    public Page() {
+    public PageData() {
 
     }
 
-    public Page(LinkedList<T> state) {
+    public PageData(LinkedList<T> state) {
 //        this.page = page;
         this.state = state;
     }

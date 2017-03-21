@@ -2,6 +2,7 @@ package rootming.tjzhic.utils;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import rootming.tjzhic.Config;
 import rootming.tjzhic.model.User;
 
 import java.io.UnsupportedEncodingException;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created by rootming on 2017/2/25.
  */
-public class PasswordUtils {
+public class RegisterUtils {
 
     private static String base64encode(String raw) {
         String result = "";
@@ -99,13 +100,28 @@ public class PasswordUtils {
 
 
 
+    static public boolean checkUsernameVaild(String username) {
+        return Config.usernamePattern.matches(username);
+    }
+
+
+    static public boolean checkEmailVaild(String email) {
+        return Config.emailPattern.matches(email);
+    }
+
+
+    static public boolean checkPasswordVaild(String password) {
+        return Config.passwordPattern.matches(password);
+    }
+
+
     public static void main(String args[]) {
         String str = base64encode("rootming");
         System.out.println("Base64 encode: " + str);
         System.out.println("Base64 decode: " + base64decode(str));
         System.out.println("MD5 encode: " + getMD5("rootming"));
         System.out.println("Password encode: " + getEnPassword("rootming"));
-        //PasswordUtils pao = new PasswordUtils();
+        //RegisterUtils pao = new RegisterUtils();
         System.out.println(UserUtils.isExistedEmail("rootming@live.cn"));
     }
 }

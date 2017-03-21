@@ -121,11 +121,11 @@
         <url-pattern>/console.jsp</url-pattern>
     </filter-mapping>
 
-    <!--JSON获取检查-->
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <servlet-name>DataHandle</servlet-name>
-    </filter-mapping>
+    <!--&lt;!&ndash;JSON获取检查&ndash;&gt;-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>LoginFilter</filter-name>-->
+        <!--<servlet-name>DataHandle</servlet-name>-->
+    <!--</filter-mapping>-->
 
     <!--API检查-->
     <filter-mapping>

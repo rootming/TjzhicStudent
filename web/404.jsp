@@ -40,7 +40,7 @@
 <div class="wrapper">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+        <!-- Content Header (PageData header) -->
         <section class="content-header">
             <h1>
                 404 Error Page

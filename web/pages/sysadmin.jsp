@@ -10,7 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Content Header (Page header) -->
+<!-- Content Header (PageData header) -->
 <section class="content-header">
     <h1>管理员维护</h1>
     <ol class="breadcrumb">
@@ -22,7 +22,7 @@
 <!-- Main content -->
 <section class="content">
 
-    <!-- Your Page Content Here -->
+    <!-- Your PageData Content Here -->
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">已添加的管理员列表</h3>

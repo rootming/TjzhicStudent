@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Content Header (Page header) -->
+<!-- Content Header (PageData header) -->
 <section class="content-header">
     <h1>修改密码</h1>
     <ol class="breadcrumb">
@@ -17,7 +17,7 @@
 
 <!-- Main content -->
 <section class="content">
-    <!-- Your Page Content Here -->
+    <!-- Your PageData Content Here -->
     <div class="callout callout-warning">
         <h4>提示</h4>
         <p>请确认信息无误后操作, 操作不可逆！</p>

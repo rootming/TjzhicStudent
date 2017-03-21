@@ -1,7 +1,8 @@
 package rootming.tjzhic.model;
 
 import rootming.tjzhic.utils.MiscUtils;
-import rootming.tjzhic.utils.PasswordUtils;
+import rootming.tjzhic.utils.RegisterUtils;
+
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 
@@ -47,13 +48,13 @@ public class User extends Model {
 
     public User(String email, String password) {
         this.email = email;
-        this.password = PasswordUtils.getEnPassword(password);
+        this.password = RegisterUtils.getEnPassword(password);
     }
 
     public User(String email, String name, String password) {
         this.email = email;
         this.name = name;
-        this.password = PasswordUtils.getEnPassword(password);
+        this.password = RegisterUtils.getEnPassword(password);
         this.group = "user";
         this.regTime = MiscUtils.getSqlTime();
     }
@@ -61,7 +62,7 @@ public class User extends Model {
     public User(String name, String email, String password, String ip, String group) {
         this.name = name;
         this.email = email;
-        this.password = PasswordUtils.getEnPassword(password);
+        this.password = RegisterUtils.getEnPassword(password);
         this.ip = ip;
         this.group = group;
         this.regTime = MiscUtils.getSqlTime();

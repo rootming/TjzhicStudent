@@ -89,7 +89,7 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="plugins/iCheck/icheck.min.js"></script>
-<script src="dist/js/tool/reg-check.js"></script>
+<%--<script src="dist/js/tool/reg-check.js"></script>--%>
 <script>
     $(function () {
         $('input').iCheck({

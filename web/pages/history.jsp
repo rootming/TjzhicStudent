@@ -11,7 +11,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!-- Content Header (Page header) -->
+<!-- Content Header (PageData header) -->
 <section class="content-header">
     <h1>登陆历史</h1>
     <ol class="breadcrumb">
@@ -23,8 +23,8 @@
 <!-- Main content -->
 <section class="content">
 
-    <!-- Your Page Content Here -->
-    <div class="box" ng-app="history-box" ng-controller="siteCtrl">
+    <!-- Your PageData Content Here -->
+    <div class="box" ng-app="historyData-box" ng-controller="siteCtrl">
         <div class="box-header">
             <h3 class="box-title">系统登陆历史记录</h3>
         </div>

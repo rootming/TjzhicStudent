@@ -47,7 +47,7 @@
 </script>
 
 
-    <!-- Content Header (Page header) -->
+    <!-- Content Header (PageData header) -->
     <section class="content-header">
         <h1>系统状态<small>简略信息</small></h1>
         <ol class="breadcrumb">
@@ -59,7 +59,7 @@
     <!-- Main content -->
     <section class="content">
 
-        <!-- Your Page Content Here -->
+        <!-- Your PageData Content Here -->
 
         <div class="row">
             <div class="col-lg-3 col-xs-6">

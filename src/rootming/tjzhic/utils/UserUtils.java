@@ -87,7 +87,7 @@ public class UserUtils {
     public boolean loginCheck(User user) {
         if(user != null) {
             if(isExistedEmail(user.getEmail())) {
-                PasswordUtils passwordUtils = new PasswordUtils();
+                RegisterUtils passwordUtils = new RegisterUtils();
                 if(passwordUtils.isPasswordValid(user)) {
                     LogUtils.log("Password is confirm");
                     return true;

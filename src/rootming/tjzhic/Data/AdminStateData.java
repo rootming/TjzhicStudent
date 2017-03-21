@@ -5,17 +5,17 @@ import java.util.LinkedList;
 /**
  * Created by rootm on 2017/3/12.
  */
-public class AdminState {
+public class AdminStateData {
     private int id;
     private String name;
     private String group;
     private String email;
 
-    public AdminState() {
+    public AdminStateData() {
 
     }
 
-    public AdminState(int id, String name, String group, String email) {
+    public AdminStateData(int id, String name, String group, String email) {
         this.id = id;
         this.name = name;
         this.group = group;
