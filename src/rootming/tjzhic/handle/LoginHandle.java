@@ -43,6 +43,7 @@ public class LoginHandle extends HttpServlet {
             User user = null;
             System.out.println(email);
             System.out.println(password);
+
             try {
                 user = (User) ModelUtils.queryObject(User.class, email);
             } catch (NoSuchMethodException | InvocationTargetException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
@@ -60,11 +61,16 @@ public class LoginHandle extends HttpServlet {
                 LogUtils.addLoginInfo(user, request.getRemoteAddr());
                 response.sendRedirect("console.jsp");
             }
+            else {
+                LogUtils.log(request.getRemoteAddr(),"Login failed");
+                request.setAttribute("message", "没有找到该邮箱或密码错误");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
         }
         else {
             LogUtils.log(request.getRemoteAddr(),"Login failed");
             request.setAttribute("message", "没有找到该邮箱或密码错误");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 //
 //        if(UserUtils.find(email)) {
