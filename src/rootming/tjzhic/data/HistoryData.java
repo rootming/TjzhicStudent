@@ -1,4 +1,4 @@
-package rootming.tjzhic.Data;
+package rootming.tjzhic.data;
 
 import java.sql.Timestamp;
 

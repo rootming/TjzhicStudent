@@ -1,4 +1,4 @@
-package rootming.tjzhic.Data;
+package rootming.tjzhic.data;
 
 import java.util.LinkedList;
 
@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * Created by rootm on 2017/3/12.
  */
 public class PageData<T> {
-//    private int page;
+    //    private int page;
     private LinkedList<T> state;
 
     public PageData() {

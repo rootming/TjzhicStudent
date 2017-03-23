@@ -1,6 +1,4 @@
-package rootming.tjzhic.Data;
-
-import java.util.LinkedList;
+package rootming.tjzhic.data;
 
 /**
  * Created by rootm on 2017/3/12.

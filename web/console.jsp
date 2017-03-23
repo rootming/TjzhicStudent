@@ -59,6 +59,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.css">
 
+    <!-- Pace style -->
+    <link rel="stylesheet" href="plugins/pace/pace.min.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -173,13 +176,18 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
-
+<!-- PACE -->
+<script src="plugins/pace/pace.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
 
 <script>
+
+    $(document).ajaxStart(function () {
+        Pace.restart();
+    });
     // 局部刷新页面
     function load(addr) {
         $.ajax({
