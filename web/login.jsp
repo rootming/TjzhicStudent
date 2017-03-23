@@ -37,11 +37,11 @@
 
         <form action="LoginHandle" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="邮箱" name="email">
+                <input type="text" class="form-control" placeholder="邮箱" id="email" name="email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="密码" name="password">
+                <input type="password" class="form-control" placeholder="密码" id="password" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -62,16 +62,18 @@
 
         </form>
 
-        <!-- /.social-auth-links -->
         <%
             String message = (String) request.getAttribute("message");
-            if(message != null && !message.equals("")) {
-                out.print("<p class=\"login-box-msg\" id=\"message\" style=\"color: red;\">" + message + "</p>");
+            if (message == null) {
+                message = "";
             }
-            else {
-                out.print("<p class=\"login-box-msg\" id=\"message\" style=\"display: none;\"></p>");
-            }
+
         %>
+        <p class="login-box-msg" id="message" style="color: red;"><%=message%>
+        </p>
+
+        <!-- /.social-auth-links -->
+
         <%--<a href="#">忘记密码</a><br>--%>
 
 
@@ -98,6 +100,44 @@
             increaseArea: '20%' // optional
         });
     });
+
+    window.onload = function () {
+        var info = '';
+        $('#reset').click(function () {
+            $(":text,:password").text('');
+            $('#message').fadeOut();
+        });
+
+
+        var emailPattern = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        var passwordPattern = /^\w{6,20}$/;
+
+        $('#email').blur(function () {
+            if (!emailPattern.test($('#email').val())) {
+                info = 'email格式不合法';
+                $('#message').text(info);
+                $('#message').css('color', 'red');
+                $('#message').fadeIn();
+            }
+            else {
+                $('#message').fadeOut();
+            }
+        });
+
+        $('#password').blur(function () {
+            if (!passwordPattern.test($('#password').val())) {
+                info = '密码由ASCII字母组成, 长度为6-20位';
+                $('#message').text(info);
+                $('#message').css('color', 'red');
+                $('#message').fadeIn();
+            }
+            else {
+                $('#message').fadeOut();
+            }
+        });
+
+    };
+
 </script>
 </body>
 </html>

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import rootming.tjzhic.Config;
 import rootming.tjzhic.data.AdminStateData;
 import rootming.tjzhic.data.HistoryData;
+import rootming.tjzhic.data.PasswordData;
 import rootming.tjzhic.data.UserStateData;
 import rootming.tjzhic.handle.LoginHandle;
 import rootming.tjzhic.model.Group;
@@ -23,12 +24,13 @@ public class APIUtils {
     private HashMap<String, String> api = new HashMap<>();
 
     private void init() {
-        api.put("del_admin", "sysadmin");
-        api.put("rst_passwd", "sysadmin");
-        api.put("mod_admin_passwd", "sysadmin");
-        api.put("get_state", "sysadmin");
-        api.put("get_admin", "sysadmin");
-        api.put("get_his", "sysadmin");
+        api.put("del_admin", "sysadmin");           //删除admin
+        api.put("rst_passwd", "sysadmin");          //重置admin密码
+        //api.put("mod_admin_passwd", "sysadmin");
+        api.put("get_state", "sysadmin");           //获取在在线信息
+        api.put("get_admin", "sysadmin");           //获取admin信息
+        api.put("get_his", "sysadmin");             //获取登录信息
+        api.put("mod_all_pass", "sysadmin");        //修改所有用户的密码
     }
 
     public APIUtils() {
@@ -120,33 +122,71 @@ public class APIUtils {
         return flag ? Config.JSONSuccess : Config.JSONError;
     }
 
-    private static String mod_admin_passwd(String arg) {
+//    private static String mod_admin_passwd(String arg) {
+//
+//        boolean flag = false;
+//        if(arg != null && arg.equals("rootming@live.cn")) {
+//            LogUtils.log("admin can not reset password!");
+//            return Config.JSONError;
+//        }
+//
+//        try {
+//            User user = (User)ModelUtils.queryObject(User.class,  arg);
+//            assert user != null;
+//            user.setPassword(RegisterUtils.getEnPassword("123456789"));
+//            ModelUtils.deleteObject(User.class, "user_email", arg);
+//            ModelUtils.addObject(user);
+//            flag = true;
+//
+//        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+//            e.printStackTrace();
+//            return Config.JSONError;
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return flag ? Config.JSONSuccess : Config.JSONError;
+//
+//    }
 
-        boolean flag = false;
-        if(arg != null && arg.equals("rootming@live.cn")) {
-            LogUtils.log("admin can not reset password!");
-            return Config.JSONError;
-        }
+
+    private static String mod_all_pass(String arg) {
+        Gson gson = new GsonBuilder().create();
+
+        PasswordData passwordData;
+
 
         try {
-            User user = (User)ModelUtils.queryObject(User.class,  arg);
-            assert user != null;
-            user.setPassword(RegisterUtils.getEnPassword("123456789"));
-            ModelUtils.deleteObject(User.class, "user_email", arg);
-            ModelUtils.addObject(user);
-            flag = true;
+            passwordData = gson.fromJson(arg, PasswordData.class);
 
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+
+            if (!UserUtils.isExistedEmail(passwordData.getEmail()))
+                return Config.JSONError;
+
+//            //更新为加密后的密码
+//            passwordData.setPassword(RegisterUtils.getEnPassword(passwordData.getPassword()));
+//            passwordData.setConfirmPassword(RegisterUtils.getEnPassword(passwordData.getConfirmPassword()));
+
+            //代码真是又臭又长
+            if (passwordData.getPassword().equals(passwordData.getConfirmPassword())) {
+                User user = (User) ModelUtils.queryObject(User.class, arg);
+                assert user != null;
+                user.setPassword(RegisterUtils.getEnPassword(passwordData.getPassword()));
+                ModelUtils.deleteObject(User.class, "user_email", arg);
+                ModelUtils.addObject(user);
+                return Config.JSONSuccess;
+            } else {
+                return Config.JSONError;
+            }
+
+
+        } catch (Exception e) {
             e.printStackTrace();
             return Config.JSONError;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
 
-        return flag ? Config.JSONSuccess : Config.JSONError;
 
     }
-
 
     private static String get_state(String arg) {
         Gson gson = new GsonBuilder().create();
@@ -163,6 +203,7 @@ public class APIUtils {
 
         UserStateData state = new UserStateData(userCount, adminCount, onlineCount);
         //System.out.println(gson.toJson(state));
+        //return "" + state.getUserCount();
         return gson.toJson(state);
     }
 
