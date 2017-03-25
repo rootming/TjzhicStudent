@@ -42,13 +42,13 @@ public class SessionListener implements ServletContextListener,
     // -------------------------------------------------------
     public void sessionCreated(HttpSessionEvent se) {
       /* Session is created. */
-        LogUtils.log(SessionListener.class, "Session is destroyed.");
+        LogUtils.log("Session is destroyed.");
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {
       /* Session is destroyed. */
 
-        LogUtils.log(SessionListener.class, "Session is destroyed.");
+        LogUtils.log("Session is destroyed.");
         HttpSession session = se.getSession();
         ServletContext application = session.getServletContext();
         String email = (String) application.getAttribute("email");

@@ -48,7 +48,7 @@ public class PageFilter implements Filter {
 //            chain.doFilter(req, resp);
         }
 //        else {
-        LogUtils.log(PageFilter.class, "No Permission access.");
+        LogUtils.log("No Permission access.");
             ((HttpServletResponse)resp).sendRedirect(request.getContextPath() + "/login.jsp");
 //        }
 

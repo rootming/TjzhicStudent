@@ -82,6 +82,17 @@
         <url-pattern>/APIHandle</url-pattern>
     </servlet-mapping>
 
+    <!--Request过滤器-->
+    <filter>
+        <filter-name>RequestFilter</filter-name>
+        <filter-class>rootming.tjzhic.filter.HttpServletRequestReplacedFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>RequestFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 
     <!--SQL注入过滤器-->
     <filter>

@@ -35,7 +35,7 @@ public class LoginHandle extends HttpServlet {
         HttpSession session = request.getSession();
         //request.setCharacterEncoding("UTF-8");
 
-        LogUtils.log(LoginHandle.class, "LoginHandle");
+        LogUtils.log("LoginHandle");
         email = request.getParameter("email");
         password = request.getParameter("password");
         if(email != null && password != null) {

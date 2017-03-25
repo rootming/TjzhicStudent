@@ -68,6 +68,11 @@ public class APIHandle extends HttpServlet {
 //        arg = request.getParameter("arg");
         group = (String)session.getAttribute("group");
 
+        if (group == null) {
+            LogUtils.log("No permission access API");
+            response.getWriter().write(Config.JSONError);
+            return;
+        }
 //        LogUtils.log("Post param: " + cmd + ", Group: " + group);
 //        if(cmd != null) {
 //            String data = null;
@@ -85,6 +90,7 @@ public class APIHandle extends HttpServlet {
         BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
         StringBuilder sb = new StringBuilder();
         String line;
+
         while ((line = br.readLine()) != null) {
             sb.append(line);
         }
@@ -96,7 +102,7 @@ public class APIHandle extends HttpServlet {
             JSONData jsonData = gson.fromJson(sb.toString(), JSONData.class);
             APIUtils api = new APIUtils();
 
-            LogUtils.log(APIHandle.class, "Post param: " + data + ", Group: " + group);
+            LogUtils.log("Post param: " + data + ", Group: " + group);
 
             try {
                 result = api.doAPI(jsonData.getCmd(), jsonData.getArg(), group);
@@ -106,7 +112,7 @@ public class APIHandle extends HttpServlet {
                 response.getWriter().write(Config.JSONError);
             }
         } else {
-            LogUtils.log(APIHandle.class, "Post param is empty");
+            LogUtils.log("Post param is empty");
             response.getWriter().write(Config.JSONError);
         }
 

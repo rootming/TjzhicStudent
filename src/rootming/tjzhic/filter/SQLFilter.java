@@ -42,13 +42,13 @@ public class SQLFilter implements Filter {
                 strSql = strSql + aValue;
             }
         }
-        LogUtils.log(SQLFilter.class, "Params: " + strSql);
+        LogUtils.log("Params: " + strSql);
         if(isSql(strSql)) {
-            LogUtils.log(SQLFilter.class, "检测到非法SQL注入");
+            LogUtils.log("检测到非法SQL注入");
             response.sendRedirect("/login.jsp");
         }
         else {
-            LogUtils.log(SQLFilter.class, "SQL注入检测通过");
+            LogUtils.log("SQL注入检测通过");
             chain.doFilter(req, resp);
         }
     }
