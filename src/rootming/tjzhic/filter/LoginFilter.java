@@ -26,11 +26,11 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)req;
         HttpSession session = request.getSession();
         if(session != null && session.getAttribute("email") != null) {
-            LogUtils.log((String)session.getAttribute("email"));
+            LogUtils.log(LoginFilter.class, (String) session.getAttribute("email"));
             chain.doFilter(req, resp);
         }
         else {
-            LogUtils.log("No Permission access.");
+            LogUtils.log(LoginFilter.class, "No Permission access.");
             req.setAttribute("message", "登陆以继续操作");
             req.getRequestDispatcher("login.jsp").forward(req, resp);
             //((HttpServletResponse)resp).sendRedirect(request.getContextPath() + "/login.jsp");

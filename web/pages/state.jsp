@@ -27,15 +27,25 @@
 
 <script>
         function updateCount() {
+            var obj = JSON.stringify({"cmd": "get_state", "arg": ""});
+
             $.ajax({
                 type: "post",
                 url: "APIHandle",
-                data: "cmd=get_state",
+                dataType: "json",
+//                data: { "cmd":"get_state", "arg":"" },
+                data: obj,
+//                contentType: "multipart/form-data",
                 success: function (str) {
-                    var obj = eval('(' + str + ')');
-                    $("#user").text(obj.userCount);
-                    $("#admin").text(obj.adminCount);
-                    $("#online").text(obj.onlineCount);
+                    console.debug(str);
+                    try {
+                        var obj = eval('(' + str + ')');
+                        $("#user").text(obj.userCount);
+                        $("#admin").text(obj.adminCount);
+                        $("#online").text(obj.onlineCount);
+                    } catch (e) {
+                        console.debug(e);
+                    }
                 }
             });
         }

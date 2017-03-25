@@ -75,11 +75,11 @@ public class UserUtils {
     public boolean register(User user) {
         if(user != null && isUserExisted(user)) {
             if(addUser(user))
-                LogUtils.log("用户注册成功");
+                LogUtils.log(UserUtils.class, "用户注册成功");
             return true;
         }
 
-        LogUtils.log("用户注册失败");
+        LogUtils.log(UserUtils.class, "用户注册失败");
         return false;
 
     }
@@ -89,16 +89,16 @@ public class UserUtils {
             if(isExistedEmail(user.getEmail())) {
                 RegisterUtils passwordUtils = new RegisterUtils();
                 if(passwordUtils.isPasswordValid(user)) {
-                    LogUtils.log("Password is confirm");
+                    LogUtils.log(UserUtils.class, "Password is confirm");
                     return true;
                 }
                 else {
-                    LogUtils.log("Password is invalid");
+                    LogUtils.log(UserUtils.class, "Password is invalid");
                     return false;
                 }
             }
             else {
-                LogUtils.log("Email: " + user.getEmail() + " not found");
+                LogUtils.log(UserUtils.class, "Email: " + user.getEmail() + " not found");
                 return false;
             }
         }

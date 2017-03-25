@@ -41,7 +41,7 @@ public class APIUtils {
         String storedGroup = api.get(cmd);
         if(storedGroup != null) {
             if(!storedGroup.contains(group)) {
-                LogUtils.log("No Permission access API: " + group);
+                LogUtils.log(APIUtils.class, "No Permission access API: " + group);
                 return false;
             }
             else {
@@ -71,7 +71,7 @@ public class APIUtils {
         }
 
         if(!found) {
-            LogUtils.log("Method not found");
+            LogUtils.log(APIUtils.class, "Method not found");
             return Config.JSONError;
         }
 
@@ -82,7 +82,7 @@ public class APIUtils {
 
         boolean flag = false;
         if(arg != null && arg.equals("rootming@live.cn")) {
-            LogUtils.log("admin can not del!");
+            LogUtils.log(APIUtils.class, "admin can not del!");
             return Config.JSONError;
         }
 
@@ -100,7 +100,7 @@ public class APIUtils {
 
         boolean flag = false;
         if(arg != null && arg.equals("rootming@live.cn")) {
-            LogUtils.log("admin can not reset password!");
+            LogUtils.log(APIUtils.class, "admin can not reset password!");
             return Config.JSONError;
         }
 
@@ -126,7 +126,7 @@ public class APIUtils {
 //
 //        boolean flag = false;
 //        if(arg != null && arg.equals("rootming@live.cn")) {
-//            LogUtils.log("admin can not reset password!");
+//            LogUtils.log(APIUtils.class, "admin can not reset password!");
 //            return Config.JSONError;
 //        }
 //
