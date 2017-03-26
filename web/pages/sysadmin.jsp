@@ -126,16 +126,22 @@
     <!-- /.box-body -->
 
     <script>
+
+
         $(".btn.btn-block.btn-danger").click(function () {
             var td = $(this).parent().parent().children()[3];
             var email = $(td).text();
             console.log("Delete: " + email);
+
+            var obj = JSON.stringify({"cmd": "del_admin", "arg": email});
+
             $.ajax({
                 type: "post",
+                url: "APIHandle",
                 dataType: "json",
-                url: "APIHandle?cmd=del_admin" + "&arg=" + email,
+                data: obj,
+//                url: "APIHandle?cmd=del_admin" + "&arg=" + email,
                 success: function(data) {
-                    console.log("APIHandle?cmd=del_admin" + "&arg=" + email);
                     console.log(data);
                     //var result = eval('(' + data + ')');
                     try {
@@ -169,10 +175,15 @@
             var td = $(this).parent().parent().children()[3];
             var email = $(td).text();
             console.log("Delete: " + email);
+
+            var obj = JSON.stringify({"cmd": "rst_passwd", "arg": email});
+
             $.ajax({
                 type: "post",
+                url: "APIHandle",
                 dataType: "json",
-                url: "APIHandle?cmd=rst_passwd" + "&arg=" + email,
+                data: obj,
+//                url: "APIHandle?cmd=rst_passwd" + "&arg=" + email,
                 success: function(data) {
                     console.log("APIHandle?cmd=rst_passwd" + "&arg=" + email);
                     console.log(data);

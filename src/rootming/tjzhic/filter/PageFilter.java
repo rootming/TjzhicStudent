@@ -1,5 +1,6 @@
 package rootming.tjzhic.filter;
 
+import rootming.tjzhic.Wrapper.AuthenticationRequestWrapper;
 import rootming.tjzhic.model.Menu;
 import rootming.tjzhic.model.User;
 import rootming.tjzhic.utils.LogUtils;
@@ -27,6 +28,10 @@ public class PageFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest)req;
         HttpSession session = request.getSession();
+        AuthenticationRequestWrapper authenticationRequestWrapper = new AuthenticationRequestWrapper(request);
+
+
+
         if(     session != null &&
                 session.getAttribute("email") != null &&
                 session.getAttribute("group") != null) {
@@ -36,8 +41,8 @@ public class PageFilter implements Filter {
                     String path = ((Menu)aData).getMenuUrl();
 //                    System.out.println(path);
 //                    System.out.println("req" + ((HttpServletRequest) req).getRequestURI());
-                    if(path.equals(((HttpServletRequest) req).getRequestURI().substring(1))) {  //去除一个'/'
-                        chain.doFilter(req, resp);
+                    if (path.equals(((HttpServletRequest) authenticationRequestWrapper).getRequestURI().substring(1))) {  //去除一个'/'
+                        chain.doFilter(authenticationRequestWrapper, resp);
                         return;
                     }
                 }
@@ -49,7 +54,7 @@ public class PageFilter implements Filter {
         }
 //        else {
         LogUtils.log("No Permission access.");
-            ((HttpServletResponse)resp).sendRedirect(request.getContextPath() + "/login.jsp");
+        ((HttpServletResponse) resp).sendRedirect(authenticationRequestWrapper.getContextPath() + "/login.jsp");
 //        }
 
     }

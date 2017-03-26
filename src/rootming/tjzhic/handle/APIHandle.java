@@ -4,8 +4,10 @@ package rootming.tjzhic.handle;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import rootming.tjzhic.Config;
+import rootming.tjzhic.Wrapper.AuthenticationRequestWrapper;
 import rootming.tjzhic.utils.APIUtils;
 import rootming.tjzhic.utils.LogUtils;
+import rootming.tjzhic.utils.SecurityUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,11 +60,14 @@ public class APIHandle extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        String cmd;
 //        String arg;
+        AuthenticationRequestWrapper authenticationRequestWrapper = new AuthenticationRequestWrapper(request);
 
         String group;
         String data, result;
         Gson gson = new Gson();
-        HttpSession session = request.getSession();
+        HttpSession session = authenticationRequestWrapper.getSession();
+
+        LogUtils.log("Get API request.");
 
 //        cmd = request.getParameter("cmd");
 //        arg = request.getParameter("arg");
@@ -87,33 +92,39 @@ public class APIHandle extends HttpServlet {
 //            response.getWriter().write(data);
 //        }
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(authenticationRequestWrapper.getInputStream()));
         StringBuilder sb = new StringBuilder();
         String line;
 
         while ((line = br.readLine()) != null) {
             sb.append(line);
         }
+
         data = sb.toString();
         br.close();
 
-        if (!data.equals("")) {
+        if (!SecurityUtils.isSql(data)) {
+            if (!data.equals("")) {
 
-            JSONData jsonData = gson.fromJson(sb.toString(), JSONData.class);
-            APIUtils api = new APIUtils();
+                LogUtils.log("Post param: " + data + ", Group: " + group);
 
-            LogUtils.log("Post param: " + data + ", Group: " + group);
+                JSONData jsonData = gson.fromJson(data, JSONData.class);
+                APIUtils api = new APIUtils();
 
-            try {
-                result = api.doAPI(jsonData.getCmd(), jsonData.getArg(), group);
-                response.getWriter().write(result);
-            } catch (InvocationTargetException | IllegalAccessException e) {
-                e.printStackTrace();
+                try {
+                    result = api.doAPI(jsonData.getCmd(), jsonData.getArg(), group);
+                    response.getWriter().write(result);
+                } catch (InvocationTargetException | IllegalAccessException e) {
+                    e.printStackTrace();
+                    LogUtils.log("Get JSON Object error");
+                    response.getWriter().write(Config.JSONError);
+                }
+            } else {
+                LogUtils.log("Post param is empty");
                 response.getWriter().write(Config.JSONError);
             }
         } else {
-            LogUtils.log("Post param is empty");
-            response.getWriter().write(Config.JSONError);
+            LogUtils.log("检测到SQL关键词");
         }
 
 

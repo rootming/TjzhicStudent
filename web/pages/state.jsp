@@ -33,16 +33,15 @@
                 type: "post",
                 url: "APIHandle",
                 dataType: "json",
-//                data: { "cmd":"get_state", "arg":"" },
                 data: obj,
-//                contentType: "multipart/form-data",
-                success: function (str) {
-                    console.debug(str);
+
+                success: function (result) {
+                    console.debug(result);
                     try {
-                        var obj = eval('(' + str + ')');
-                        $("#user").text(obj.userCount);
-                        $("#admin").text(obj.adminCount);
-                        $("#online").text(obj.onlineCount);
+                        //var obj = eval('(' + str + ')');
+                        $("#user").text(result.userCount);
+                        $("#admin").text(result.adminCount);
+                        $("#online").text(result.onlineCount);
                     } catch (e) {
                         console.debug(e);
                     }
@@ -52,6 +51,7 @@
 
 
         $(function () {
+
             setInterval("updateCount()", 60000); //每隔60秒刷新
         });
 </script>

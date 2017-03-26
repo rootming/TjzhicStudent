@@ -23,15 +23,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-5.1.40-bin.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$APPLICATION_HOME_DIR$/redist/annotations-java8.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -42,6 +33,15 @@
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/OneDrive/software/Dev_Tools/gson-2.8.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/OneDrive/software/Dev_Tools/guava-21.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

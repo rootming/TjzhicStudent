@@ -1,5 +1,6 @@
 package rootming.tjzhic.handle;
 
+import rootming.tjzhic.Wrapper.AuthenticationRequestWrapper;
 import rootming.tjzhic.model.User;
 import rootming.tjzhic.utils.*;
 
@@ -33,11 +34,12 @@ public class LoginHandle extends HttpServlet {
         String email;
         String password;
         HttpSession session = request.getSession();
+        AuthenticationRequestWrapper authenticationRequestWrapper = new AuthenticationRequestWrapper(request);
         //request.setCharacterEncoding("UTF-8");
 
         LogUtils.log("LoginHandle");
-        email = request.getParameter("email");
-        password = request.getParameter("password");
+        email = authenticationRequestWrapper.getParameter("email");
+        password = authenticationRequestWrapper.getParameter("passwd");
         if(email != null && password != null) {
             password = RegisterUtils.getEnPassword(password);
             User user = null;
@@ -52,25 +54,26 @@ public class LoginHandle extends HttpServlet {
 
 
             if (user != null && user.getPassword().equals(password)) {
-                LogUtils.log(request.getRemoteAddr(), "Login successful");
+                LogUtils.log(authenticationRequestWrapper.getRemoteAddr(), "Login successful");
                 session.setAttribute("email", user.getEmail());
                 session.setAttribute("name", user.getName());
                 session.setAttribute("group", user.getGroup());
                 session.setAttribute("regTime", user.getRegTime());
                 map.add(user.getEmail());
-                LogUtils.addLoginInfo(user, request.getRemoteAddr());
+                LogUtils.addLoginInfo(user, authenticationRequestWrapper.getRemoteAddr());
                 response.sendRedirect("console.jsp");
             }
             else {
-                LogUtils.log(request.getRemoteAddr(),"Login failed");
-                request.setAttribute("message", "没有找到该邮箱或密码错误");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                LogUtils.log(authenticationRequestWrapper.getRemoteAddr(), "Login failed");
+                authenticationRequestWrapper.setAttribute("message", "没有找到该邮箱或密码错误");
+                authenticationRequestWrapper.getRequestDispatcher("login.jsp").forward(authenticationRequestWrapper, response);
             }
         }
         else {
-            LogUtils.log(request.getRemoteAddr(),"Login failed");
-            request.setAttribute("message", "没有找到该邮箱或密码错误");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            LogUtils.log("Email or password not filled");
+            LogUtils.log(authenticationRequestWrapper.getRemoteAddr(), "Login failed");
+            authenticationRequestWrapper.setAttribute("message", "没有找到该邮箱或密码错误");
+            authenticationRequestWrapper.getRequestDispatcher("login.jsp").forward(authenticationRequestWrapper, response);
         }
 //
 //        if(UserUtils.find(email)) {

@@ -1,5 +1,6 @@
 package rootming.tjzhic.filter;
 
+import rootming.tjzhic.Wrapper.AuthenticationRequestWrapper;
 import rootming.tjzhic.utils.LogUtils;
 
 import javax.servlet.*;
@@ -24,15 +25,19 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
 
         HttpServletRequest request = (HttpServletRequest)req;
-        HttpSession session = request.getSession();
+
+        AuthenticationRequestWrapper authenticationRequestWrapper = new AuthenticationRequestWrapper(request);
+        HttpSession session = authenticationRequestWrapper.getSession();
+
+
         if(session != null && session.getAttribute("email") != null) {
             LogUtils.log((String) session.getAttribute("email"));
-            chain.doFilter(req, resp);
+            chain.doFilter(authenticationRequestWrapper, resp);
         }
         else {
             LogUtils.log("No Permission access.");
-            req.setAttribute("message", "登陆以继续操作");
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            authenticationRequestWrapper.setAttribute("message", "登陆以继续操作");
+            authenticationRequestWrapper.getRequestDispatcher("login.jsp").forward(authenticationRequestWrapper, resp);
             //((HttpServletResponse)resp).sendRedirect(request.getContextPath() + "/login.jsp");
         }
 

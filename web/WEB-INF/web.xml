@@ -4,14 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!--超时设置-->
-    <session-config>
-        <session-timeout>5</session-timeout>
-    </session-config>
-    
-    <listener>
-        <listener-class>rootming.tjzhic.listener.SessionListener</listener-class>
-    </listener>
+    <!--页面的设置-->
 
     <!--主页设置-->
     <welcome-file-list>
@@ -24,7 +17,20 @@
         <location>/404.jsp</location>
     </error-page>
 
-    <!--Login handle-->
+    <!--超时设置-->
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
+
+    <!--listener -->
+    <listener>
+        <listener-class>rootming.tjzhic.listener.SessionListener</listener-class>
+    </listener>
+
+
+    <!--Handle设置-->
+
+    <!--登陆 handle-->
     <servlet>
         <servlet-name>LoginHandle</servlet-name>
         <servlet-class>rootming.tjzhic.handle.LoginHandle</servlet-class>
@@ -35,11 +41,10 @@
         <url-pattern>/LoginHandle</url-pattern>
     </servlet-mapping>
 
-    <!--Logout handle-->
+    <!--注销 handle-->
     <servlet>
         <servlet-name>LogoutHandle</servlet-name>
         <servlet-class>rootming.tjzhic.handle.LogoutHandle</servlet-class>
-
     </servlet>
 
     <servlet-mapping>
@@ -48,8 +53,7 @@
     </servlet-mapping>
 
 
-    <!--Register Handle-->
-
+    <!--注册 Handle-->
     <servlet>
         <servlet-name>RegisterHandle</servlet-name>
         <servlet-class>rootming.tjzhic.handle.RegisterHandle</servlet-class>
@@ -59,17 +63,6 @@
         <servlet-name>RegisterHandle</servlet-name>
         <url-pattern>/RegisterHandle</url-pattern>
     </servlet-mapping>
-
-    <!--Data Handle-->
-    <!--<servlet>-->
-        <!--<servlet-name>DataHandle</servlet-name>-->
-        <!--<servlet-class>rootming.tjzhic.handle.DataHandle</servlet-class>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>DataHandle</servlet-name>-->
-        <!--<url-pattern>/DataHandle</url-pattern>-->
-    <!--</servlet-mapping>-->
 
     <!--API Handle-->
     <servlet>
@@ -82,28 +75,9 @@
         <url-pattern>/APIHandle</url-pattern>
     </servlet-mapping>
 
-    <!--Request过滤器-->
-    <filter>
-        <filter-name>RequestFilter</filter-name>
-        <filter-class>rootming.tjzhic.filter.HttpServletRequestReplacedFilter</filter-class>
-    </filter>
 
-    <filter-mapping>
-        <filter-name>RequestFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <!--过滤器设置-->
 
-
-    <!--SQL注入过滤器-->
-    <filter>
-        <filter-name>SQLFilter</filter-name>
-        <filter-class>rootming.tjzhic.filter.SQLFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>SQLFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 
     <!--设置编码-->
     <filter>
@@ -121,6 +95,17 @@
         <url-pattern>/*/*</url-pattern>
     </filter-mapping>
 
+    <!--&lt;!&ndash;SQL注入过滤器&ndash;&gt;-->
+    <!--<filter>-->
+    <!--<filter-nSecuelter</filter-name>-->
+    <!--<filter-clrootming.tjzhic.utils.Secue</filter-class>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+    <!--<filter-nSecuelter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
     <!--console页面登陆检查-->
     <filter>
         <filter-name>LoginFilter</filter-name>
@@ -130,18 +115,6 @@
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/console.jsp</url-pattern>
-    </filter-mapping>
-
-    <!--&lt;!&ndash;JSON获取检查&ndash;&gt;-->
-    <!--<filter-mapping>-->
-        <!--<filter-name>LoginFilter</filter-name>-->
-        <!--<servlet-name>DataHandle</servlet-name>-->
-    <!--</filter-mapping>-->
-
-    <!--API检查-->
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <servlet-name>APIHandle</servlet-name>
     </filter-mapping>
 
     <!--页面访问检查-->

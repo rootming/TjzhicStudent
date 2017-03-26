@@ -156,11 +156,19 @@ public class APIUtils {
 
         PasswordData passwordData;
 
+        arg = arg.replace("\\", "");
+
+        LogUtils.log(arg);
 
         try {
             passwordData = gson.fromJson(arg, PasswordData.class);
 
 
+            //密碼不相符
+            if (!passwordData.getPassword().equals(passwordData.getConfirmPassword()))
+                return Config.JSONError;
+
+            //郵箱不存在
             if (!UserUtils.isExistedEmail(passwordData.getEmail()))
                 return Config.JSONError;
 
@@ -170,12 +178,16 @@ public class APIUtils {
 
             //代码真是又臭又长
             if (passwordData.getPassword().equals(passwordData.getConfirmPassword())) {
-                User user = (User) ModelUtils.queryObject(User.class, arg);
-                assert user != null;
-                user.setPassword(RegisterUtils.getEnPassword(passwordData.getPassword()));
-                ModelUtils.deleteObject(User.class, "user_email", arg);
-                ModelUtils.addObject(user);
-                return Config.JSONSuccess;
+                User user = (User) ModelUtils.queryObject(User.class, passwordData.getEmail());
+
+                if (user != null) {
+                    user.setPassword(RegisterUtils.getEnPassword(passwordData.getPassword()));
+                    ModelUtils.deleteObject(User.class, "user_email", passwordData.getEmail());
+                    ModelUtils.addObject(user);
+                    return Config.JSONSuccess;
+                } else {
+                    return Config.JSONError;
+                }
             } else {
                 return Config.JSONError;
             }

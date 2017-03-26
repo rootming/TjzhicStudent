@@ -1,6 +1,10 @@
 package rootming.tjzhic.filter;
 
+import rootming.tjzhic.Wrapper.AuthenticationRequestWrapper;
+import rootming.tjzhic.utils.LogUtils;
+
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -15,9 +19,14 @@ public class EncodeFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        servletRequest.setCharacterEncoding("utf-8");
+//        servletRequest.setCharacterEncoding("utf-8");
+
+        AuthenticationRequestWrapper authenticationRequestWrapper = new AuthenticationRequestWrapper((HttpServletRequest) servletRequest);
+
+        LogUtils.log("Set Character Encoding");
+        authenticationRequestWrapper.setCharacterEncoding("utf-8");
         servletResponse.setCharacterEncoding("utf-8");
-        filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(authenticationRequestWrapper, servletResponse);
     }
 
     @Override
