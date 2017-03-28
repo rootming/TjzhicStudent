@@ -93,7 +93,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body" id="error-modal-box">
-                                    密码修改失败
+                                    密码修改失败, 请检查邮箱是否存在
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline" data-dismiss="modal"

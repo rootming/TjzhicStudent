@@ -12,10 +12,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Content Header (PageData header) -->
 <section class="content-header">
-    <h1>管理员维护</h1>
+    <h1>修改管理员信息</h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>console</a></li>
-        <li class="active">管理员维护</li>
+        <li class="active">修改管理员信息</li>
     </ol>
 </section>
 

@@ -41,7 +41,7 @@ public class PageFilter implements Filter {
                     String path = ((Menu)aData).getMenuUrl();
 //                    System.out.println(path);
 //                    System.out.println("req" + ((HttpServletRequest) req).getRequestURI());
-                    if (path.equals(((HttpServletRequest) authenticationRequestWrapper).getRequestURI().substring(1))) {  //去除一个'/'
+                    if (path.equals((authenticationRequestWrapper).getRequestURI().substring(1))) {  //去除一个'/'
                         chain.doFilter(authenticationRequestWrapper, resp);
                         return;
                     }

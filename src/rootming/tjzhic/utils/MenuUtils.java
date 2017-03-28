@@ -42,7 +42,7 @@ public class MenuUtils {
         for (Object aData : data) {
             Menu tmp = (Menu) aData;
             for (LinkedList<Menu> parent : items) {
-                if (tmp.getMenuClass() != 0 && tmp.getMenuParentNumber() == parent.get(0).getMenuNumber()) {
+                if (tmp.getMenuClass() != 0 && Objects.equals(tmp.getMenuParentNumber(), parent.get(0).getMenuNumber())) {
                     parent.add(tmp);
                 }
             }
@@ -50,17 +50,19 @@ public class MenuUtils {
 
 
         //测试 遍历目录
-//        for(LinkedList<Menu> item : items) {
-//            if(item.size() == 1) {
-//                System.out.println(item.get(0).getMenuName());
-//            }
-//            else {
+        for (LinkedList<Menu> item : items) {
+            if (item.size() == 1) {
+                System.out.println(item.get(0).getMenuName());
+            } else {
 //                for(Menu unit : item) {
-//                    System.out.print(unit + " ");
+//                    System.out.print(" " + unit.getMenuName());
 //                }
-//                System.out.println();
-//            }
-//        }
+                System.out.println(item.get(0).getMenuName());
+                for (int i = 1; i < item.size(); i++) {
+                    System.out.println("\t" + item.get(i).getMenuName());
+                }
+            }
+        }
 
         return items;
     }

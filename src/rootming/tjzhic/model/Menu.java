@@ -7,9 +7,9 @@ import java.util.LinkedHashMap;
  */
 public class Menu extends Model {
 
-    private int menuNumber;                //表示Item的顺序, 不可重复
-    private int menuParentNumber;          //父级menuNumber, 0为没有父级目录
-    private int menuClass;                 //Item的级别, 0为一级目录, 没有子目录
+    private Integer menuNumber;                //表示Item的顺序, 不可重复
+    private Integer menuParentNumber;          //父级menuNumber, 0为没有父级目录
+    private Integer menuClass;                 //Item的级别, 0为一级目录, 没有子目录
     private String menuName;               //Item的名称
     private String menuUrl;                //Item的URL, 父目录没有URL
     private String menuGroup;              //Item的所属组
@@ -33,7 +33,7 @@ public class Menu extends Model {
         super();
     }
 
-    public Menu(int menuNumber, int menuParentNumber, int menuClass, String menuName, String menuUrl, String menuGroup) {
+    public Menu(Integer menuNumber, Integer menuParentNumber, Integer menuClass, String menuName, String menuUrl, String menuGroup) {
         this.menuNumber = menuNumber;
         this.menuParentNumber = menuParentNumber;
         this.menuClass = menuClass;
@@ -42,27 +42,27 @@ public class Menu extends Model {
         this.menuGroup = menuGroup;
     }
 
-    public int getMenuNumber() {
+    public Integer getMenuNumber() {
         return menuNumber;
     }
 
-    public void setMenuNumber(int menuNumber) {
+    public void setMenuNumber(Integer menuNumber) {
         this.menuNumber = menuNumber;
     }
 
-    public int getMenuParentNumber() {
+    public Integer getMenuParentNumber() {
         return menuParentNumber;
     }
 
-    public void setMenuParentNumber(int menuParentNumber) {
+    public void setMenuParentNumber(Integer menuParentNumber) {
         this.menuParentNumber = menuParentNumber;
     }
 
-    public int getMenuClass() {
+    public Integer getMenuClass() {
         return menuClass;
     }
 
-    public void setMenuClass(int menuClass) {
+    public void setMenuClass(Integer menuClass) {
         this.menuClass = menuClass;
     }
 
