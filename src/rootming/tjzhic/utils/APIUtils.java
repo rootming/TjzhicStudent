@@ -3,10 +3,7 @@ package rootming.tjzhic.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import rootming.tjzhic.Config;
-import rootming.tjzhic.data.AdminStateData;
-import rootming.tjzhic.data.HistoryData;
-import rootming.tjzhic.data.PasswordData;
-import rootming.tjzhic.data.UserStateData;
+import rootming.tjzhic.data.*;
 import rootming.tjzhic.handle.LoginHandle;
 import rootming.tjzhic.model.Group;
 import rootming.tjzhic.model.Log;
@@ -31,6 +28,7 @@ public class APIUtils {
         api.put("get_admin", "sysadmin");           //获取admin信息
         api.put("get_his", "sysadmin");             //获取登录信息
         api.put("mod_all_pass", "sysadmin");        //修改所有用户的密码
+        api.put("add_admin", "sysadmin");           //添加管理员
     }
 
     public APIUtils() {
@@ -156,7 +154,7 @@ public class APIUtils {
 
         PasswordData passwordData;
 
-        arg = arg.replace("\\", "");
+//        arg = arg.replace("\\", "");
 
         LogUtils.log(arg);
 
@@ -298,12 +296,50 @@ public class APIUtils {
         return gson.toJson(historyData);
     }
 
+    private static String add_admin(String arg) {
+        Gson gson = new GsonBuilder().create();
+        AdminData adminData;
+        LogUtils.log("Post param: " + arg);
+
+        try {
+            adminData = gson.fromJson(arg, AdminData.class);
+            //密碼不相符
+            if (!adminData.getPassword().equals(adminData.getConfirmPassword()))
+                return Config.JSONError;
+
+
+            if (RegisterUtils.checkPasswordValid(adminData.getPassword()) &&
+                    RegisterUtils.checkEmailValid(adminData.getEmail()) &&
+                    RegisterUtils.checkUsernameValid(adminData.getUsername()) &&
+                    RegisterUtils.hasGroup(adminData.getGroup())) {
+
+                User user = new User();
+                user.setEmail(adminData.getEmail());
+                user.setName(adminData.getUsername());
+                user.setPassword(RegisterUtils.getEnPassword(adminData.getPassword()));
+                user.setGroup(adminData.getGroup());
+                try {
+                    ModelUtils.addObject(user);
+                    return Config.JSONSuccess;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                LogUtils.log("不符合规范的管理员注册请求");
+                return Config.JSONError;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Config.JSONError;
+    }
+
 
 
     public static void main(String []args) throws InvocationTargetException, IllegalAccessException {
         APIUtils test = new APIUtils();
-        System.out.println(test.doAPI("del_admin", "rootming@live.cn", "sysadmin"));
-        System.out.println(del_admin("rootming@live.cn"));
+        System.out.println(RegisterUtils.checkPasswordValid("niaogev5"));
     }
 
 

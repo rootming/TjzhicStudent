@@ -76,7 +76,14 @@
 
                 </tbody>
                 <tfoot>
-                <tr><th rowspan="1" colspan="1">序号</th><th rowspan="1" colspan="1">管理员名</th><th rowspan="1" colspan="1">管理员用户组</th><th rowspan="1" colspan="1">管理员邮箱</th><th rowspan="1" colspan="1">清除密码</th></tr>
+                <tr>
+                    <th rowspan="1" colspan="1">序号</th>
+                    <th rowspan="1" colspan="1">管理员名</th>
+                    <th rowspan="1" colspan="1">管理员用户组</th>
+                    <th rowspan="1" colspan="1">管理员邮箱</th>
+                    <th rowspan="1" colspan="1">清除密码</th>
+                    <th rowspan="1" colspan="1">删除用户</th>
+                </tr>
                 </tfoot>
             </table>
             </div>

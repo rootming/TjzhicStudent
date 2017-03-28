@@ -99,19 +99,22 @@ public class RegisterUtils {
     }
 
 
-
-    static public boolean checkUsernameVaild(String username) {
-        return Config.usernamePattern.matches(username);
+    public static boolean checkUsernameValid(String username) {
+        return username.matches(Config.usernamePattern);
     }
 
 
-    static public boolean checkEmailVaild(String email) {
-        return Config.emailPattern.matches(email);
+    public static boolean checkEmailValid(String email) {
+        return email.matches(Config.emailPattern);
     }
 
 
-    static public boolean checkPasswordVaild(String password) {
-        return Config.passwordPattern.matches(password);
+    public static boolean checkPasswordValid(String password) {
+        return password.matches(Config.passwordPattern);
+    }
+
+    public static boolean hasGroup(String group) {
+        return Config.groups.contains(group);
     }
 
 

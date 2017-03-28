@@ -4,6 +4,7 @@ import rootming.tjzhic.Config;
 import rootming.tjzhic.model.User;
 import rootming.tjzhic.utils.LogUtils;
 import rootming.tjzhic.utils.ModelUtils;
+import rootming.tjzhic.utils.RegisterUtils;
 import rootming.tjzhic.utils.UserUtils;
 
 import javax.servlet.ServletException;
@@ -70,21 +71,21 @@ public class RegisterHandle extends HttpServlet {
             return;
         }
 
-        if(!name.matches(Config.usernamePattern)) {
+        if (!RegisterUtils.checkUsernameValid(name)) {
             LogUtils.log("Username not Valid");
             request.setAttribute("message", "用户名不合法");
             request.getRequestDispatcher("/register.jsp").forward(request, response);
             return;
         }
 
-        if(!email.matches(Config.emailPattern)) {
+        if (!RegisterUtils.checkEmailValid(email)) {
             LogUtils.log("Email not Valid");
             request.setAttribute("message", "email不合法");
             request.getRequestDispatcher("/register.jsp").forward(request, response);
             return;
         }
 
-        if(!password.matches(Config.passwordPattern)) {
+        if (!RegisterUtils.checkPasswordValid(password)) {
             LogUtils.log("Password not Valid");
             request.setAttribute("message", "密码不合法");
             request.getRequestDispatcher("/register.jsp").forward(request, response);

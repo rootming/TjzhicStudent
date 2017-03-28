@@ -112,7 +112,7 @@ public class APIHandle extends HttpServlet {
                 APIUtils api = new APIUtils();
 
                 try {
-                    result = api.doAPI(jsonData.getCmd(), jsonData.getArg(), group);
+                    result = api.doAPI(jsonData.getCmd(), jsonData.getArg().replace("\\", ""), group);
                     response.getWriter().write(result);
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     e.printStackTrace();

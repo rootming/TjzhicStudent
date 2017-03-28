@@ -1,5 +1,6 @@
 package rootming.tjzhic;
 
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,5 +26,12 @@ public class Config {
     public final static String usernamePattern = "^\\w{6,20}$";
     public final static String emailPattern = "^([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+\\.[a-zA-Z]{2,3}$";
     public final static String passwordPattern = "^\\w{6,20}$";
+
+    public final static HashSet groups = new HashSet<String>() {{
+        add("sysadmin");
+        add("eduadmin");
+        add("stuadmin");
+        add("user");
+    }};
 
 }

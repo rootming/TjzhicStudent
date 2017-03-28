@@ -2,11 +2,13 @@
   <dictionary name="rootm">
     <words>
       <w>cmdshell</w>
+      <w>eduadmin</w>
       <w>netuser</w>
       <w>passwd</w>
       <w>rootm</w>
       <w>rootming</w>
       <w>sitename</w>
+      <w>stuadmin</w>
       <w>tjzhic</w>
     </words>
   </dictionary>
