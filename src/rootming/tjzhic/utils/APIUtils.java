@@ -7,6 +7,7 @@ import rootming.tjzhic.data.*;
 import rootming.tjzhic.handle.LoginHandle;
 import rootming.tjzhic.model.Group;
 import rootming.tjzhic.model.Log;
+import rootming.tjzhic.model.Stage;
 import rootming.tjzhic.model.User;
 
 import java.lang.reflect.InvocationTargetException;
@@ -29,6 +30,7 @@ public class APIUtils {
         api.put("get_his", "sysadmin");             //获取登录信息
         api.put("mod_all_pass", "sysadmin");        //修改所有用户的密码
         api.put("add_admin", "sysadmin");           //添加管理员
+        api.put("add_stage", "sysadmin");           //添加阶段定义
     }
 
     public APIUtils() {
@@ -332,6 +334,27 @@ public class APIUtils {
             e.printStackTrace();
         }
 
+        return Config.JSONError;
+    }
+
+    private static String add_stage(String arg) {
+        Gson gson = new GsonBuilder().create();
+        StageData stageData;
+        LogUtils.log("Add stage: " + arg);
+        try {
+            stageData = gson.fromJson(arg, StageData.class);
+            //TODO: 对信息添加验证, 时间来不及先不做了
+
+            Stage stage = new Stage(stageData);
+            try {
+                ModelUtils.addObject(stage);
+                return Config.JSONSuccess;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return Config.JSONError;
     }
 

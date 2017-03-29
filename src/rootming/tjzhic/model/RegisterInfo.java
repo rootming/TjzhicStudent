@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
  */
 public class RegisterInfo extends Model {
 
-    private int userID;
+    private Integer userID;
     private String name;
     private String username;
     private String idCode;
@@ -33,7 +33,7 @@ public class RegisterInfo extends Model {
     private boolean isConfirm;
     private String testcardNumber;
     private String examRoom;
-    private int searNumber;
+    private Integer searNumber;
 
     @Override
     protected void init() {

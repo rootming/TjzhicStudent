@@ -1,58 +1,54 @@
 <%--
   Created by IntelliJ IDEA.
   User: rootm
-  Date: 2017/3/27
-  Time: 21:47
+  Date: 2017/3/6
+  Time: 13:07
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!-- Content Header (PageData header) -->
 <section class="content-header">
-    <h1>增加管理员</h1>
+    <h1>阶段定义</h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>console</a></li>
-        <li class="active">增加管理员</li>
+        <li class="active">阶段定义</li>
     </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
 
+    <!-- Your PageData Content Here -->
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">管理员信息</h3>
+            <h3 class="box-title">阶段添加</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
         <form role="form">
             <div class="box-body">
                 <div class="form-group">
-                    <label for="username">用户名</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名">
+                    <label for="stateID">阶段编号</label>
+                    <input type="text" class="form-control" name="stateID" id="stateID" placeholder="编号">
                 </div>
 
                 <div class="form-group">
-                    <label for="email">邮箱</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="请输入邮箱">
+                    <label for="stateName">阶段名称</label>
+                    <input type="text" class="form-control" name="stateName" id="stateName" placeholder="邮箱">
                 </div>
 
                 <div class="form-group">
-                    <label for="password">密码</label>
-                    <input type="password" class="form-control" name="password" id="password"
-                           placeholder="请输入密码">
+                    <label for="startTime">开始时间</label>
+                    <input type="datetime-local" class="form-control" name="startTime" id="startTime">
                 </div>
 
                 <div class="form-group">
-                    <label for="confirmPassword">确认密码</label>
-                    <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"
-                           placeholder="请再次输入密码">
+                    <label for="endTime">结束时间</label>
+                    <input type="datetime-local" class="form-control" name="endTime" id="endTime">
                 </div>
                 <div class="form-group">
-                    <label>管理员类型</label>
-                    <select class="form-control select2" id="group" name="group">
-                        <option selected="selected" value="sysadmin">系统管理员</option>
-                        <option value="eduadmin">教务管理员</option>
-                        <option value="stuadmin">招生管理员</option>
-                    </select>
+                    <label for="stateInfo">阶段说明</label>
+                    <input type="text" class="form-control" name="stateInfo" id="stateInfo">
                 </div>
             </div>
             <!-- /.box-body -->
@@ -77,7 +73,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="info-modal-box">
-                    管理员添加成功
+                    添加成功
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline" data-dismiss="modal"
@@ -99,7 +95,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="error-modal-box">
-                    管理员添加失败
+                    添加失败
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline" data-dismiss="modal"
@@ -109,89 +105,26 @@
             </div>
         </div>
     </div>
+
     <script>
 
         var info = '';
         $('#reset').click(function () {
-            $(":text,:password").text('');
+            $("input").text('');
             $('#message').fadeOut();
         });
 
-        var usernamePattern = /^\w{6,20}$/;
-        var emailPattern = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-        var passwordPattern = /^\w{6,20}$/;
-
-        $('#username').blur(function () {
-            if (!usernamePattern.test($('#username').val())) {
-                info = '用户名由ASCII字母组成, 长度为6-20位';
-                $('#message').text(info);
-                $('#message').css('color', 'red');
-                $('#message').fadeIn();
-            }
-            else {
-                $('#message').fadeOut();
-            }
-        });
-
-        $('#email').blur(function () {
-            if (!emailPattern.test($('#email').val())) {
-                info = 'email格式不合法';
-                $('#message').text(info);
-                $('#message').css('color', 'red');
-                $('#message').fadeIn();
-            }
-            else {
-                $('#message').fadeOut();
-            }
-        });
-
-        $('#password').blur(function () {
-            if (!passwordPattern.test($('#password').val())) {
-                info = '密码由ASCII字母组成, 长度为6-20位';
-                $('#message').text(info);
-                $('#message').css('color', 'red');
-                $('#message').fadeIn();
-            }
-            else {
-                $('#message').fadeOut();
-            }
-        });
-
-        $('#confirmpassword').blur(function () {
-            if (!passwordPattern.test($('#confirmpassword').val())) {
-                info = '密码由ASCII字母组成, 长度为6-20位';
-                $('#message').text(info);
-                $('#message').css('color', 'red');
-                $('#message').fadeIn();
-
-            }
-            else {
-                $('#message').fadeOut();
-            }
-
-            if ($('#confirmpassword').val() != $('#password').val()) {
-                info = '密码不符合';
-                $('#message').text(info);
-                $('#message').css('color', 'red');
-                $('#message').fadeIn();
-            }
-            else {
-                $('#message').fadeOut();
-            }
-        });
-
-
         $("#submit").click(function () {
             var argument = {};
-            argument.username = $("#username").val();
-            argument.email = $("#email").val();
-            argument.password = $("#password").val();
-            argument.confirmPassword = $("#confirmPassword").val();
-            argument.group = $("#group").val();
+            argument.id = $("#stateID").val();
+            argument.name = $("#stateName").val();
+            argument.startTime = $("#startTime").val();
+            argument.endTime = $("#endTime").val();
+            argument.information = $("#stateInfo").val();
 
             var argObj = JSON.stringify(argument);
 
-            var obj = JSON.stringify({"cmd": "add_admin", "arg": argObj});
+            var obj = JSON.stringify({"cmd": "add_stage", "arg": argObj});
 
             console.debug(obj);
 

@@ -8,10 +8,10 @@ import java.util.LinkedHashMap;
 public class Major extends Model {
 
     private String name;            //专业名称
-    private int planNumber;         //计划招生人数
-    private int applyNumber;        //实际录取的人数
-    private int passScore;          //录取分数线
-    private int passNumber;         //录取人数
+    private Integer planNumber;         //计划招生人数
+    private Integer applyNumber;        //实际录取的人数
+    private Integer passScore;          //录取分数线
+    private Integer passNumber;         //录取人数
 
     @Override
     protected void init() {

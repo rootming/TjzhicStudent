@@ -169,7 +169,7 @@
 
 
         $("#submit").click(function () {
-            argument = {};
+            var argument = {};
             argument.email = $("#email").val();
             argument.password = $("#password").val();
             argument.confirmPassword = $("#confirmPassword").val();

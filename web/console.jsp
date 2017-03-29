@@ -62,6 +62,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Pace style -->
     <link rel="stylesheet" href="plugins/pace/pace.min.css">
 
+    <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -72,6 +74,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 
     <script src="plugins/angular/angular.min.js"></script>
+
+    <script src="plugins/datepicker/moment.js"></script>
+    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
 
 </head>
 <!--
@@ -182,6 +187,7 @@ desired effect
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
+
 
 <script>
 

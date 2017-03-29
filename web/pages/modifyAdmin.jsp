@@ -197,7 +197,7 @@
                     //var result = eval('(' + data + ')');
 
                     try {
-                        if (data.success == 1) {
+                        if (data.success === 1) {
                             console.log("API execute done");
                             $("#info-modal-box").html("密码已重置为<strong>123456789</strong>");
                             $('#infoModal').modal('show');

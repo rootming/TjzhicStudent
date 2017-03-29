@@ -2,7 +2,9 @@
   <dictionary name="rootm">
     <words>
       <w>cmdshell</w>
+      <w>datepicker</w>
       <w>eduadmin</w>
+      <w>fullcalendar</w>
       <w>netuser</w>
       <w>passwd</w>
       <w>rootm</w>

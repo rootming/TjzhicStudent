@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
  */
 public class School extends Model {
 
-    private int id;
+    private Integer id;
     private String code;        //招生代码
     private String name;        //学校名称
     private String address;     //学校地址

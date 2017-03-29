@@ -9,7 +9,7 @@ public class Grade extends Model {
 
     private String cardNumber;          //准考证号码
     private String courseCode;          //课程代码
-    private int score;                  //分数
+    private Integer score;              //分数
     private String note;                //备注
     private boolean status;             //成绩是否可以修改
 
