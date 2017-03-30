@@ -12,6 +12,7 @@ import rootming.tjzhic.model.User;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -31,6 +32,8 @@ public class APIUtils {
         api.put("mod_all_pass", "sysadmin");        //修改所有用户的密码
         api.put("add_admin", "sysadmin");           //添加管理员
         api.put("add_stage", "sysadmin");           //添加阶段定义
+        api.put("get_stage", "sysadmin");           //获取阶段定义
+        api.put("del_stage", "sysadmin");           //删除阶段定义
     }
 
     public APIUtils() {
@@ -81,7 +84,7 @@ public class APIUtils {
 
     private static String del_admin(String arg) {
 
-        boolean flag = false;
+        boolean flag;
         if(arg != null && arg.equals("rootming@live.cn")) {
             LogUtils.log("admin can not del!");
             return Config.JSONError;
@@ -299,7 +302,7 @@ public class APIUtils {
     }
 
     private static String add_admin(String arg) {
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new Gson();
         AdminData adminData;
         LogUtils.log("Post param: " + arg);
 
@@ -345,13 +348,25 @@ public class APIUtils {
             stageData = gson.fromJson(arg, StageData.class);
             //TODO: 对信息添加验证, 时间来不及先不做了
 
-            Stage stage = new Stage(stageData);
-            try {
-                ModelUtils.addObject(stage);
+            long start = Long.valueOf(stageData.getStartTime());
+            long end = Long.valueOf(stageData.getEndTime());
+
+            Timestamp startTime = new Timestamp(start);
+            Timestamp endTime = new Timestamp(end);
+
+            Stage stage = new Stage();
+            stage.setId(stageData.getId());
+            stage.setName(stageData.getName());
+            stage.setStartTime(startTime);
+            stage.setEndTime(endTime);
+            stage.setInformation(stageData.getInformation());
+            //TODO: 重复检测有问题需要修复
+
+            if (ModelUtils.addObject(stage))
                 return Config.JSONSuccess;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            else
+                return Config.JSONError;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -359,10 +374,36 @@ public class APIUtils {
     }
 
 
+    private static String del_stage(String arg) {
+
+        boolean flag;
+
+        try {
+            flag = ModelUtils.deleteObject(Stage.class, "stage_id", arg);
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+            return Config.JSONError;
+        }
+        return flag ? Config.JSONSuccess : Config.JSONError;
+
+    }
+
+    private static String get_stage(String arg) {
+        Gson gson = new GsonBuilder().create();
+        LinkedList<Object> stages;
+        try {
+            stages = ModelUtils.queryAllObject(Stage.class);
+            return gson.toJson(stages);
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return Config.JSONError;
+    }
+
 
     public static void main(String []args) throws InvocationTargetException, IllegalAccessException {
         APIUtils test = new APIUtils();
-        System.out.println(RegisterUtils.checkPasswordValid("niaogev5"));
+
     }
 
 

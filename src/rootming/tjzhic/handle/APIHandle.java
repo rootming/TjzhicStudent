@@ -92,7 +92,7 @@ public class APIHandle extends HttpServlet {
 //            response.getWriter().write(data);
 //        }
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(authenticationRequestWrapper.getInputStream()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(authenticationRequestWrapper.getInputStream(), "UTF-8"));
         StringBuilder sb = new StringBuilder();
         String line;
 

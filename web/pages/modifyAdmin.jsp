@@ -152,7 +152,7 @@
                     console.log(data);
                     //var result = eval('(' + data + ')');
                     try {
-                        if (data.success == 1) {
+                        if (data.success === 1) {
                             $(td).parent().hide();
                             $("#info-modal-box").html("管理员已删除");
                             $('#infoModal').modal('show');

@@ -34,7 +34,7 @@
 
                 <div class="form-group">
                     <label for="stateName">阶段名称</label>
-                    <input type="text" class="form-control" name="stateName" id="stateName" placeholder="邮箱">
+                    <input type="text" class="form-control" name="stateName" id="stateName" placeholder="名称">
                 </div>
 
                 <div class="form-group">
@@ -115,11 +115,17 @@
         });
 
         $("#submit").click(function () {
+            var startTime = document.getElementById('startTime');
+            var endTime = document.getElementById('endTime');
+
+            var startTimeStamp = new Date(startTime.value).getTime();
+            var endTimeStamp = new Date(endTime.value).getTime();
+
             var argument = {};
             argument.id = $("#stateID").val();
             argument.name = $("#stateName").val();
-            argument.startTime = $("#startTime").val();
-            argument.endTime = $("#endTime").val();
+            argument.startTime = startTimeStamp.toString();
+            argument.endTime = endTimeStamp.toString();
             argument.information = $("#stateInfo").val();
 
             var argObj = JSON.stringify(argument);

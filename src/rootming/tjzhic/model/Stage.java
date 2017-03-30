@@ -1,7 +1,5 @@
 package rootming.tjzhic.model;
 
-import rootming.tjzhic.data.StageData;
-
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 
@@ -21,8 +19,8 @@ public class Stage extends Model {
         LinkedHashMap<String, String> fields = new LinkedHashMap<>();
         fields.put("stage_id", "key");
         fields.put("stage_name", null);
-        fields.put("stage_startTime", null);
-        fields.put("stage_endTime", null);
+        fields.put("stage_start", null);
+        fields.put("stage_end", null);
         fields.put("stage_information", null);
         setFieldsList(fields);
         setTableName("`stage`");
@@ -31,14 +29,6 @@ public class Stage extends Model {
     public Stage() {
     }
 
-    public Stage(StageData stageData) {
-        this.id = stageData.getStateID();
-        this.name = stageData.getStateName();
-        this.startTime = stageData.getStartTime();
-        this.endTime = stageData.getEndTime();
-        this.information = stageData.getInformation();
-
-    }
 
     public Stage(String stateID, String name, Timestamp startTime, Timestamp endTime, String information) {
         this.id = stateID;
@@ -48,12 +38,12 @@ public class Stage extends Model {
         this.information = information;
     }
 
-    public String getStateID() {
+    public String getId() {
         return id;
     }
 
-    public void setStateID(String stateID) {
-        this.id = stateID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

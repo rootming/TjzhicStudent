@@ -395,14 +395,14 @@ public class ModelUtils {
 //        User query = (User) queryObject(User.class, "328901936@qq.com");
 //        System.out.println(query.getName());
 
-        LinkedList<Object> menuList = queryAllObject(Log.class);
+        LinkedList<Object> menuList = queryAllObject(Stage.class);
         System.out.println(menuList.size());
         for (Object aMenuList : menuList) {
-            Log item = (Log) aMenuList;
-            System.out.println(item.getGroup());
+            Stage item = (Stage) aMenuList;
+            System.out.println(item.getInformation());
         }
         //genTestUser(1000);
-        genAdmin(10, "stuadmin");
+        //genAdmin(10, "stuadmin");
 
         //Model data = new User.class.getClass();
 

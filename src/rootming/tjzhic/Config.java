@@ -11,7 +11,7 @@ public class Config {
 
 //    数据库配置
     public final static String driver = "com.mysql.jdbc.Driver";
-    public final static String url = "jdbc:mysql://localhost:3306/tjzhic";
+    public final static String url = "jdbc:mysql://localhost:3306/tjzhic?characterEncoding=utf-8";
     public final static String username = "root";
     public final static String password = "1q2w3e4r5";
 

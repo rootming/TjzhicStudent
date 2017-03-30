@@ -5,53 +5,56 @@ import java.sql.Timestamp;
 /**
  * Created by rootm on 2017/3/29.
  */
+
+//TODO: 时区有问题
+
 public class StageData {
     private String id;
     private String name;
-    private Timestamp startTime;
-    private Timestamp endTime;
+    private String startTime;
+    private String endTime;
     private String information;
 
     public StageData() {
     }
 
-    public StageData(String stateID, String stateName, Timestamp startTime, Timestamp endTime, String information) {
-        this.id = stateID;
-        this.name = stateName;
+    public StageData(String id, String name, String startTime, String endTime, String information) {
+        this.id = id;
+        this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
         this.information = information;
     }
 
-    public String getStateID() {
+    public String getId() {
         return id;
     }
 
-    public void setStateID(String stateID) {
-        this.id = stateID;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getStateName() {
+    public String getName() {
         return name;
     }
 
-    public void setStateName(String stateName) {
-        this.name = stateName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Timestamp getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
